@@ -1,7 +1,3 @@
-import React from 'react';
+import Next from './Component';
 
-function Login() {
-    return <div>Inside Login Page</div>;
-}
-
-export default Login;
+export default Next;

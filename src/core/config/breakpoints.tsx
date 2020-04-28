@@ -7,6 +7,5 @@ export const breakPoints = {
     mobileScreen: '@media only screen and (max-width: 767px)',
     uptoMediumScreen: '@media only screen and (min-width: 0) and (max-width: 1199px)',
     uptoSmallMedium: '@media only screen and (min-width: 0px) and (max-width: 991px)',
-    smallScreen: '@media (max-width: 580px)',
-    smallScreen2: '@media only screen and (max-width: 367px)',
+    smallScreen: '@media (max-width: 576px)',
 };

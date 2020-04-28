@@ -34,6 +34,7 @@ module.exports = {
   rules: {
     // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
     "@typescript-eslint/explicit-function-return-type": OFF,
+    "@typescript-eslint/no-explicit-any": OFF,
   },
 };
 

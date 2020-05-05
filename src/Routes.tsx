@@ -1,10 +1,12 @@
 import React, { Suspense, lazy } from 'react';
 import { withRouter, Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Base from './components/Layout/Base';
 
 const waitFor = (Tag) => (props) => <Tag {...props} />;
 const Login = lazy(() => import('./pages/Login/index'));
 const Home = lazy(() => import('./pages/Home'));
+const Dashboard = lazy(() => import('./components/Dashboard/index'));
 
 const Routes = (props) => {
     const { location } = props;
@@ -20,11 +22,14 @@ const Routes = (props) => {
         );
     }
     return (
-        <Suspense fallback={<div>Loading</div>}>
-            <Switch location={location}>
-                <Route path="/home" component={waitFor(Home)} />
-            </Switch>
-        </Suspense>
+        <Base>
+            <Suspense fallback={<div>Loading</div>}>
+                <Switch location={location}>
+                    <Route path="/home" component={waitFor(Home)} />
+                    <Route path="/dashboard" component={waitFor(Dashboard)} />
+                </Switch>
+            </Suspense>
+        </Base>
     );
 };
 Routes.propTypes = {

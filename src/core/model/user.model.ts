@@ -33,3 +33,6 @@ export interface UserAuth {
     isSignedUp: boolean;
     loading: boolean;
 }
+export interface Settings {
+    open?: boolean;
+}

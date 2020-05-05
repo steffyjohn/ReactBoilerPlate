@@ -3,16 +3,14 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { useStyles } from './LoginStyles';
-import { SIGN_IN, FORGOT_PASSWORD } from './../../core/config/constants';
 import validator from 'validator';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import PropTypes from 'prop-types';
+import { useStyles } from './LoginStyles';
 
-export default function Login() {
+function SignIn(props) {
     const classes = useStyles();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -31,6 +29,9 @@ export default function Login() {
         if (!password) {
             setpasswordError(true);
         }
+        if (email && password) {
+            props.history.push('/dashboard');
+        }
     };
     const onChange = (e) => {
         const { name, value } = e.target;
@@ -48,17 +49,17 @@ export default function Login() {
     };
     return (
         <Grid container component="main" className={classes.root}>
-            <CssBaseline />
-            <Grid item xs={false} sm={4} md={7} className={classes.image} />
-            <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+            <Container component="main" maxWidth="xs" className={classes.color}>
+                <CssBaseline />
+
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}></Avatar>
                     <Typography component="h1" variant="h5">
-                        {SIGN_IN}
+                        Sign in
                     </Typography>
-                    <form className={classes.form} onSubmit={onSubmit} noValidate>
+
+                    <form className={classes.form} noValidate onSubmit={onSubmit}>
                         <TextField
-                            error={isEmailError}
                             variant="outlined"
                             margin="normal"
                             required
@@ -67,14 +68,13 @@ export default function Login() {
                             label="Email Address"
                             name="email"
                             autoComplete="email"
-                            helperText={isEmailError ? emailError : ''}
                             autoFocus
+                            error={isEmailError}
+                            helperText={isEmailError ? emailError : ''}
                             onChange={onChange}
                         />
-
                         <TextField
                             variant="outlined"
-                            error={passwordError}
                             margin="normal"
                             required
                             fullWidth
@@ -83,22 +83,36 @@ export default function Login() {
                             type="password"
                             id="password"
                             autoComplete="current-password"
+                            error={passwordError}
                             onChange={onChange}
                         />
-                        <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-                            {SIGN_IN}
-                        </Button>
-                        <Grid container>
-                            <Grid item xs>
-                                <Link href="#" variant="body2">
-                                    {FORGOT_PASSWORD}
-                                </Link>
-                            </Grid>
-                        </Grid>
-                        <Box mt={5}></Box>
+                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                className={classes.submit}
+                                size={'large'}
+                            >
+                                Sign In
+                            </Button>
+                        </div>
+                        {/* <Grid container>
+            <Grid item xs>
+              <Link href="#" variant="body2">
+                Forgot password?
+              </Link>
+            </Grid>
+            
+          </Grid> */}
                     </form>
                 </div>
-            </Grid>
+            </Container>
         </Grid>
     );
 }
+SignIn.propTypes = {
+    history: PropTypes.array,
+};
+export default SignIn;

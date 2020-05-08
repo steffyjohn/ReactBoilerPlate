@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import MaterialTable, { Column } from 'material-table';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import swal from 'sweetalert';
@@ -23,8 +22,12 @@ interface TableState {
     columns: Array<Column<Row>>;
     data: Row[];
 }
+interface UserListingProps {
+    layout: { primary?: string };
+}
+
 const _initial = { first: '', email: '', last: '', Role: 'Admin' };
-function UserListingComponent(props) {
+function UserListingComponent(props: UserListingProps) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [scroll, setScroll] = React.useState<DialogProps['scroll']>('paper');
@@ -142,9 +145,7 @@ function UserListingComponent(props) {
         </UserWrapper>
     );
 }
-UserListingComponent.propTypes = {
-    layout: PropTypes.object,
-};
+
 const mapStateToProps = (state) => {
     return {
         layout: state.settings.layout,

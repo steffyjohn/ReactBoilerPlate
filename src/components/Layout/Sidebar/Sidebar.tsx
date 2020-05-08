@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
-import PropTypes from 'prop-types';
 import IconButton from '@material-ui/core/IconButton';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import ListItem from '@material-ui/core/ListItem';
@@ -17,6 +16,13 @@ import { getToggleSettings } from './../../../slices/settingSlice';
 import { useStyles } from './../CommonStyle';
 import { useTheme } from '@material-ui/core/styles';
 
+interface SidebarProps {
+    open: boolean;
+    getToggleSettings: Function;
+    history: any;
+    theme: boolean;
+}
+
 const Items = [
     { label: 'Dashboard', Icon: <DashboardIcon />, route: '/dashboard' },
     { label: 'User', Icon: <PermIdentityIcon />, route: '/user' },
@@ -24,7 +30,7 @@ const Items = [
 function activeRoute(routeName) {
     return window.location.href.indexOf(routeName) > -1 ? true : false;
 }
-function Sidebar(props) {
+function Sidebar(props: SidebarProps) {
     const classes = useStyles();
     const _theme = useTheme();
 
@@ -92,12 +98,7 @@ function Sidebar(props) {
         </Wrapper>
     );
 }
-Sidebar.propTypes = {
-    open: PropTypes.bool,
-    getToggleSettings: PropTypes.func,
-    history: PropTypes.object,
-    theme: PropTypes.bool,
-};
+
 const mapDispatchToProps = (dispatch) => ({
     getToggleSettings: (payload) => dispatch(getToggleSettings(payload)),
 });

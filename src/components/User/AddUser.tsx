@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
-import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import validator from 'validator';
 import { useStyles, UserWrapper } from './Userstyles';
 import { UserError } from '../../core/model/error.model';
 import { FIELD_REQUIRED, EMAIL_VALIDATION_ERROR } from './../../core/config/constants';
 
-function AddUser(props) {
+interface AddUserProps {
+    list: { email?: string; first?: string; last?: string; Role?: string };
+    isNewUser?: boolean;
+    onRowAdd: Function;
+    onRowEdit: Function;
+    onClose: Function;
+}
+
+function AddUser(props: AddUserProps) {
     const classes = useStyles();
     const [state, setState] = React.useState(props.list);
     const [errors, setErrors] = useState<UserError>({ isEmail: false, isfirst: false });
@@ -50,7 +57,6 @@ function AddUser(props) {
         }
         setErrors(errors);
         setState({ ...state, [name]: value });
-        console.log('sttae', state);
     };
     const Roles = [
         {
@@ -146,11 +152,5 @@ function AddUser(props) {
         </UserWrapper>
     );
 }
-AddUser.propTypes = {
-    list: PropTypes.object,
-    isNewUser: PropTypes.bool,
-    onRowAdd: PropTypes.func,
-    onRowEdit: PropTypes.func,
-    onClose: PropTypes.func,
-};
+
 export default AddUser;

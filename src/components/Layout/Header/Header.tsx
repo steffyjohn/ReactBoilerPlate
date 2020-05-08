@@ -8,11 +8,17 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { withStyles } from '@material-ui/core/styles';
 import { FormControlLabel } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
-import PropTypes from 'prop-types';
 import { useStyles } from './../CommonStyle';
 import { getToggleSettings, changeDefaultTheme } from './../../../slices/settingSlice';
 
-function Header(props) {
+interface HeaderProps {
+    open: boolean;
+    getToggleSettings: Function;
+    changeDefaultTheme: Function;
+    theme: any;
+}
+
+function Header(props: HeaderProps) {
     const [state, setState] = React.useState({
         isChecked: false,
     });
@@ -64,12 +70,7 @@ function Header(props) {
         </AppBar>
     );
 }
-Header.propTypes = {
-    open: PropTypes.bool,
-    getToggleSettings: PropTypes.func,
-    changeDefaultTheme: PropTypes.func,
-    theme: PropTypes.any,
-};
+
 const mapDispatchToProps = (dispatch) => ({
     getToggleSettings: (payload) => dispatch(getToggleSettings(payload)),
     changeDefaultTheme: (payload) => dispatch(changeDefaultTheme(payload)),

@@ -1,4 +1,4 @@
-import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 const drawerWidth = 240;
 
 export const useStyles = makeStyles((theme: Theme) =>
@@ -12,9 +12,8 @@ export const useStyles = makeStyles((theme: Theme) =>
                 easing: theme.transitions.easing.sharp,
                 duration: theme.transitions.duration.leavingScreen,
             }),
-            backgroundRepeat: 'repeat-x !important',
-            backgroundColor: '#3d4977 !important',
-            // backgroundImage: "linear-gradient(19deg, #21D4FD 0%, #B721FF 100%)"
+            backgroundRepeat: 'repeat-x ',
+            backgroundColor: theme.palette.primary.main,
         },
         appBarShift: {
             marginLeft: drawerWidth,
@@ -41,7 +40,9 @@ export const useStyles = makeStyles((theme: Theme) =>
                 easing: theme.transitions.easing.sharp,
                 duration: theme.transitions.duration.enteringScreen,
             }),
+            backgroundColor: `${theme.palette.secondary.main}!important`,
         },
+
         drawerClose: {
             transition: theme.transitions.create('width', {
                 easing: theme.transitions.easing.sharp,
@@ -61,7 +62,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             ...theme.mixins.toolbar,
         },
         color: {
-            backgroundColor: '#3d4977 !important',
+            backgroundColor: theme.palette.primary.main,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'flex-end',
@@ -70,7 +71,31 @@ export const useStyles = makeStyles((theme: Theme) =>
         },
         content: {
             flexGrow: 1,
-            padding: theme.spacing(3),
+            // padding: theme.spacing(3),
+            marginBottom: '60px',
+        },
+        icon: {
+            color: 'white',
         },
     }),
 );
+
+export const FooterStyles = makeStyles((theme: Theme) => ({
+    footer: {
+        position: 'fixed',
+        left: '0',
+        right: '0',
+        bottom: '0',
+        height: '60px',
+        borderTop: '1px solid #e4eaec',
+        padding: theme.spacing(0),
+        zIndex: 109,
+        backgroundColor: 'white',
+    },
+    right: {
+        padding: theme.spacing(2, 0),
+        margin: '0',
+        fontSize: '14px',
+        textAlign: 'center',
+    },
+}));

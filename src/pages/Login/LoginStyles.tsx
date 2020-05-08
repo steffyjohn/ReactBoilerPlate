@@ -1,23 +1,21 @@
 import { makeStyles } from '@material-ui/core/styles';
-import AdminImage from './../../assets/9.jpg';
+import AdminImage from './../../assets/Admin.jpg';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
         height: '100vh',
         backgroundImage: `url(${AdminImage})`,
         backgroundRepeat: 'no-repeat',
-        // backgroundColor: theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
         backgroundSize: 'cover',
         backgroundPosition: 'center',
     },
 
     paper: {
-        // marginTop: theme.spacing(8),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        paddingTop: '25px',
-        paddingBottom: '25px',
+        paddingTop: theme.spacing(3),
+        paddingBottom: theme.spacing(3),
     },
 
     avatar: {
@@ -27,16 +25,15 @@ export const useStyles = makeStyles((theme) => ({
     form: {
         maxWidth: '400px',
         marginBottom: '10px',
-        paddingLeft: '25px',
-        paddingRight: '25px',
-        // width: '100%', // Fix IE 11 issue.
+
+        paddingLeft: theme.spacing(3),
+        paddingRight: theme.spacing(3),
         marginTop: theme.spacing(1),
     },
     color: {
         background: 'white',
-        // maxHeight: "50vh",
         margin: 'auto',
-        borderRadius: '10px',
+        borderRadius: theme.spacing(1.5),
     },
     submit: {
         margin: theme.spacing(1.5, 0, 2),

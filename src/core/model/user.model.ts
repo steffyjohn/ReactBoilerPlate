@@ -35,4 +35,6 @@ export interface UserAuth {
 }
 export interface Settings {
     open?: boolean;
+    isDefaultTheme?: boolean;
+    layout?: Record<string, any>;
 }

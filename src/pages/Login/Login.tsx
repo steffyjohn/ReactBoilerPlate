@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import PropTypes from 'prop-types';
 import { useStyles } from './LoginStyles';
+import { EMAIL_VALIDATION_ERROR } from './../../core/config/constants';
 
 function SignIn(props) {
     const classes = useStyles();
@@ -24,7 +25,7 @@ function SignIn(props) {
             setIsEmailError(true);
         } else if (!validator.isEmail(email)) {
             setIsEmailError(true);
-            setEmailError('Please provide a valid Email');
+            setEmailError(EMAIL_VALIDATION_ERROR);
         }
         if (!password) {
             setpasswordError(true);
@@ -98,14 +99,6 @@ function SignIn(props) {
                                 Sign In
                             </Button>
                         </div>
-                        {/* <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            
-          </Grid> */}
                     </form>
                 </div>
             </Container>
@@ -113,6 +106,6 @@ function SignIn(props) {
     );
 }
 SignIn.propTypes = {
-    history: PropTypes.array,
+    history: PropTypes.object,
 };
 export default SignIn;

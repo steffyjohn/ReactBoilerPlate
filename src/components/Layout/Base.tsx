@@ -6,11 +6,10 @@ import Footer from './Footer/index';
 import { getToggleSettings } from './../../slices/settingSlice';
 import { useStyles } from './CommonStyle';
 import Header from './Header/index';
-import Sidebar from './Sidebar/Sidebar';
+import Sidebar from './Sidebar/index';
 
 function BaseLayout(props) {
     const classes = useStyles();
-
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -24,6 +23,7 @@ function BaseLayout(props) {
         </div>
     );
 }
+
 BaseLayout.propTypes = {
     children: PropTypes.any,
 };
@@ -33,6 +33,7 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => {
     return {
         open: state.settings.open,
+        theme: state.settings.isDefaultTheme,
     };
 };
 

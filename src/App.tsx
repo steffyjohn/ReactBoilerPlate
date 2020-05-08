@@ -1,16 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import { BrowserRouter } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
 import Routes from './Routes';
 
-class App extends Component {
-    render() {
-        return (
-            <BrowserRouter>
-                <Routes />
-            </BrowserRouter>
-        );
-    }
+function App(props) {
+    return (
+        <BrowserRouter>
+            <Routes />
+        </BrowserRouter>
+    );
 }
-
 export default App;

@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import MaterialTable, { Column } from 'material-table';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import swal from 'sweetalert';
 import Dialog, { DialogProps } from '@material-ui/core/Dialog';
-import { DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
+import { DialogContent, DialogContentText, DialogTitle, NativeSelect } from '@material-ui/core';
+import { useSelector } from 'react-redux';
 import CardHeader from './../../core/config/CardHeader/CardHeader';
 import { useStyles, UserWrapper } from './Userstyles';
 import AddUser from './AddUser';
 import { showToast } from './../../core/config/Toast';
 import { SUCCESS, DELETE_CONFIRMATION, WARNING } from './../../core/config/constants';
+import { DefaultStore } from './../../core/model/store.model';
 
 interface Row {
     first: string;
@@ -23,9 +23,15 @@ interface TableState {
     columns: Array<Column<Row>>;
     data: Row[];
 }
+interface UserListingProps {
+    layout: { primary?: string };
+}
+
 const _initial = { first: '', email: '', last: '', Role: 'Admin' };
-function UserListingComponent(props) {
+
+function UserListingComponent(props: UserListingProps) {
     const classes = useStyles();
+    const { layout } = useSelector((state: DefaultStore) => state.settings);
     const [open, setOpen] = React.useState(false);
     const [scroll, setScroll] = React.useState<DialogProps['scroll']>('paper');
     const [isNewUser, setIsNewUser] = React.useState(true);
@@ -54,7 +60,7 @@ function UserListingComponent(props) {
             icon: WARNING,
             buttons: {
                 confirm: {
-                    className: props.layout.primary,
+                    className: layout.primary,
                 },
             },
         }).then((willDelete) => {
@@ -88,6 +94,7 @@ function UserListingComponent(props) {
             return { ...prevState, data };
         });
     };
+
     return (
         <UserWrapper>
             <CardHeader
@@ -100,6 +107,7 @@ function UserListingComponent(props) {
                 }}
             />
             <ToastContainer />
+
             <div className={classes.table}>
                 <MaterialTable
                     title=""
@@ -142,12 +150,5 @@ function UserListingComponent(props) {
         </UserWrapper>
     );
 }
-UserListingComponent.propTypes = {
-    layout: PropTypes.object,
-};
-const mapStateToProps = (state) => {
-    return {
-        layout: state.settings.layout,
-    };
-};
-export default connect(mapStateToProps, null)(UserListingComponent);
+
+export default UserListingComponent;

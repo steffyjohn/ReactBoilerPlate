@@ -7,11 +7,13 @@ import Grid from '@material-ui/core/Grid';
 import validator from 'validator';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import PropTypes from 'prop-types';
 import { useStyles } from './LoginStyles';
 import { EMAIL_VALIDATION_ERROR } from './../../core/config/constants';
 
-function SignIn(props) {
+interface SignInProps {
+    history: any;
+}
+function SignIn(props: SignInProps) {
     const classes = useStyles();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -69,7 +71,6 @@ function SignIn(props) {
                             label="Email Address"
                             name="email"
                             autoComplete="email"
-                            autoFocus
                             error={isEmailError}
                             helperText={isEmailError ? emailError : ''}
                             onChange={onChange}
@@ -105,7 +106,5 @@ function SignIn(props) {
         </Grid>
     );
 }
-SignIn.propTypes = {
-    history: PropTypes.object,
-};
+
 export default SignIn;

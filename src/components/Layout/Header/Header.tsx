@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Toolbar from '@material-ui/core/Toolbar';
 import Switch from '@material-ui/core/Switch';
 import IconButton from '@material-ui/core/IconButton';
@@ -8,30 +8,38 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { withStyles } from '@material-ui/core/styles';
 import { FormControlLabel } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
-import PropTypes from 'prop-types';
 import { useStyles } from './../CommonStyle';
 import { getToggleSettings, changeDefaultTheme } from './../../../slices/settingSlice';
+import { DefaultStore } from './../../../core/model/store.model';
 
-function Header(props) {
+interface HeaderProps {
+    open: boolean;
+    getToggleSettings: Function;
+    changeDefaultTheme: Function;
+    isDefaultTheme: any;
+}
+
+function Header(props: HeaderProps) {
     const [state, setState] = React.useState({
         isChecked: false,
     });
-
+    const dispatch = useDispatch();
+    const { isDefaultTheme } = useSelector((state: DefaultStore) => state.settings);
     const classes = useStyles();
     const ToggleSwitch = withStyles({
         switchBase: {
             '&$checked + $track': {
-                backgroundColor: props.theme ? '#01579B' : '#004D40',
+                backgroundColor: isDefaultTheme ? '#01579B' : '#004D40',
             },
         },
         checked: {},
         track: {},
     })(Switch);
     const handleDrawerOpen = () => {
-        props.getToggleSettings({ open: true });
+        dispatch(getToggleSettings({ open: true }));
     };
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        props.changeDefaultTheme({ isDefaultTheme: event.target.checked });
+        dispatch(changeDefaultTheme({ isDefaultTheme: event.target.checked }));
         setState({ ...state, [event.target.name]: event.target.checked });
     };
 
@@ -64,15 +72,5 @@ function Header(props) {
         </AppBar>
     );
 }
-Header.propTypes = {
-    open: PropTypes.bool,
-    getToggleSettings: PropTypes.func,
-    changeDefaultTheme: PropTypes.func,
-    theme: PropTypes.any,
-};
-const mapDispatchToProps = (dispatch) => ({
-    getToggleSettings: (payload) => dispatch(getToggleSettings(payload)),
-    changeDefaultTheme: (payload) => dispatch(changeDefaultTheme(payload)),
-});
 
-export default connect(null, mapDispatchToProps)(Header);
+export default Header;

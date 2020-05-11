@@ -1,10 +1,11 @@
 import React, { Suspense, lazy } from 'react';
 import { withRouter, Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Base from './components/Layout/Base';
 import PageLoader from './components/Common/PageLoader';
+import { DefaultStore } from './core/model/store.model';
 
 const waitFor = (Tag) => (props) => <Tag {...props} />;
 const Login = lazy(() => import('./pages/Login/index'));
@@ -14,15 +15,16 @@ const UserList = lazy(() => import('./components/User/index'));
 
 const Routes = (props) => {
     const { location } = props;
+    const { layout, isDefaultTheme } = useSelector((state: DefaultStore) => state.settings);
     const listofPages = ['/', '/login'];
 
     const theme = createMuiTheme({
         palette: {
             primary: {
-                main: props.layout.primary,
+                main: layout.primary,
             },
             secondary: {
-                main: props.layout.secondary,
+                main: layout.secondary,
             },
         },
     });
@@ -54,10 +56,5 @@ Routes.propTypes = {
     location: PropTypes.object,
     layout: PropTypes.object,
 };
-const mapStateToProps = (state) => {
-    return {
-        theme: state.settings.isDefaultTheme,
-        layout: state.settings.layout,
-    };
-};
-export default withRouter(connect(mapStateToProps, null)(Routes));
+
+export default withRouter(Routes);

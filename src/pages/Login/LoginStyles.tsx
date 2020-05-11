@@ -4,7 +4,8 @@ import AdminImage from './../../assets/Admin.jpg';
 export const useStyles = makeStyles((theme) => ({
     root: {
         height: '100vh',
-        backgroundImage: `url(${AdminImage})`,
+        // backgroundImage: `url(${AdminImage})`,
+        backgroundImage: 'linear-gradient(-20deg, #26a69a 0%, #8ddad5 100%);',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
@@ -20,7 +21,7 @@ export const useStyles = makeStyles((theme) => ({
 
     avatar: {
         margin: theme.spacing(1),
-        backgroundColor: '#b188c5',
+        backgroundColor: '#85908f',
     },
     form: {
         maxWidth: '400px',
@@ -37,5 +38,9 @@ export const useStyles = makeStyles((theme) => ({
     },
     submit: {
         margin: theme.spacing(1.5, 0, 2),
+        backgroundColor: '#26a69a',
+        '&:hover': {
+            backgroundColor: '#26a69abd',
+        },
     },
 }));

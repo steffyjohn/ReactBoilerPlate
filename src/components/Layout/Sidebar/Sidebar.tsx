@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -12,15 +12,17 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import { getToggleSettings } from './../../../slices/settingSlice';
-import { useStyles } from './../CommonStyle';
 import { useTheme } from '@material-ui/core/styles';
+import { getToggleSettings } from './../../../slices/settingSlice';
+import { useHistory } from 'react-router-dom';
+import { useStyles } from './../CommonStyle';
+import { DefaultStore } from './../../../core/model/store.model';
 
 interface SidebarProps {
     open: boolean;
     getToggleSettings: Function;
     history: any;
-    theme: boolean;
+    isDefaultTheme: any;
 }
 
 const Items = [
@@ -31,39 +33,51 @@ function activeRoute(routeName) {
     return window.location.href.indexOf(routeName) > -1 ? true : false;
 }
 function Sidebar(props: SidebarProps) {
+    const { open, isDefaultTheme } = useSelector((state: DefaultStore) => state.settings);
+    const dispatch = useDispatch();
     const classes = useStyles();
     const _theme = useTheme();
-
+    const history = useHistory();
     const Wrapper = styled.div`
         .MuiDrawer-paperAnchorDockedLeft {
             background-color: ${_theme.palette.secondary.main};
         }
     `;
     const handleDrawerClose = () => {
-        props.getToggleSettings({ open: false });
+        dispatch(getToggleSettings({ open: false }));
     };
     const handleClick = (item) => {
-        props.history.push(item.route);
+        history.push(item.route);
     };
+    React.useEffect(() => {
+        const updateSize = () => {
+            if (window.innerWidth < 850) {
+                dispatch(getToggleSettings({ open: false }));
+            }
+        };
+        window.addEventListener('resize', updateSize);
+        updateSize();
+        return () => window.removeEventListener('resize', updateSize);
+    }, []);
 
     return (
         <Wrapper>
             <Drawer
                 variant="permanent"
                 className={clsx(classes.drawer, {
-                    [classes.drawerOpen]: props.open,
-                    [classes.drawerClose]: !props.open,
+                    [classes.drawerOpen]: open,
+                    [classes.drawerClose]: !open,
                 })}
                 classes={{
                     paper: clsx({
-                        [classes.drawerOpen]: props.open,
-                        [classes.drawerClose]: !props.open,
+                        [classes.drawerOpen]: open,
+                        [classes.drawerClose]: !open,
                     }),
                 }}
             >
                 <div className={classes.color}>
                     <IconButton onClick={handleDrawerClose}>
-                        <MenuOpenIcon style={{ color: props.open ? 'white' : 'black' }} />
+                        <MenuOpenIcon style={{ color: open ? 'white' : 'black' }} />
                     </IconButton>
                 </div>
                 <Divider />
@@ -74,7 +88,7 @@ function Sidebar(props: SidebarProps) {
                                 style={{
                                     color: activeRoute(text.route)
                                         ? _theme.palette.primary.main
-                                        : props.theme
+                                        : isDefaultTheme
                                         ? '#515253'
                                         : 'white',
                                 }}
@@ -85,7 +99,7 @@ function Sidebar(props: SidebarProps) {
                                 style={{
                                     color: activeRoute(text.route)
                                         ? _theme.palette.primary.main
-                                        : props.theme
+                                        : isDefaultTheme
                                         ? 'rgba(81, 82, 83, 0.66)'
                                         : '#e0dede',
                                 }}
@@ -99,14 +113,4 @@ function Sidebar(props: SidebarProps) {
     );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    getToggleSettings: (payload) => dispatch(getToggleSettings(payload)),
-});
-const mapStateToProps = (state) => {
-    return {
-        open: state.settings.open,
-        theme: state.settings.isDefaultTheme,
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
+export default Sidebar;

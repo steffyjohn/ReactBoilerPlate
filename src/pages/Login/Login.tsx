@@ -71,7 +71,6 @@ function SignIn(props: SignInProps) {
                             label="Email Address"
                             name="email"
                             autoComplete="email"
-                            autoFocus
                             error={isEmailError}
                             helperText={isEmailError ? emailError : ''}
                             onChange={onChange}

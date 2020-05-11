@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Toolbar from '@material-ui/core/Toolbar';
 import Switch from '@material-ui/core/Switch';
 import IconButton from '@material-ui/core/IconButton';
@@ -10,34 +10,36 @@ import { FormControlLabel } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import { useStyles } from './../CommonStyle';
 import { getToggleSettings, changeDefaultTheme } from './../../../slices/settingSlice';
+import { DefaultStore } from './../../../core/model/store.model';
 
 interface HeaderProps {
     open: boolean;
     getToggleSettings: Function;
     changeDefaultTheme: Function;
-    theme: any;
+    isDefaultTheme: any;
 }
 
 function Header(props: HeaderProps) {
     const [state, setState] = React.useState({
         isChecked: false,
     });
-
+    const dispatch = useDispatch();
+    const { isDefaultTheme } = useSelector((state: DefaultStore) => state.settings);
     const classes = useStyles();
     const ToggleSwitch = withStyles({
         switchBase: {
             '&$checked + $track': {
-                backgroundColor: props.theme ? '#01579B' : '#004D40',
+                backgroundColor: isDefaultTheme ? '#01579B' : '#004D40',
             },
         },
         checked: {},
         track: {},
     })(Switch);
     const handleDrawerOpen = () => {
-        props.getToggleSettings({ open: true });
+        dispatch(getToggleSettings({ open: true }));
     };
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        props.changeDefaultTheme({ isDefaultTheme: event.target.checked });
+        dispatch(changeDefaultTheme({ isDefaultTheme: event.target.checked }));
         setState({ ...state, [event.target.name]: event.target.checked });
     };
 
@@ -71,9 +73,4 @@ function Header(props: HeaderProps) {
     );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    getToggleSettings: (payload) => dispatch(getToggleSettings(payload)),
-    changeDefaultTheme: (payload) => dispatch(changeDefaultTheme(payload)),
-});
-
-export default connect(null, mapDispatchToProps)(Header);
+export default Header;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import MaterialTable, { Column } from 'material-table';
 import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
-import Switch from '@material-ui/core/Switch';
+import { Switch } from '@material-ui/core';
 import swal from 'sweetalert';
 import Dialog, { DialogProps } from '@material-ui/core/Dialog';
 import { DialogContent, DialogContentText, DialogTitle, NativeSelect } from '@material-ui/core';
@@ -150,8 +150,10 @@ function UserListingComponent(props: UserListingProps) {
                               ]
                             : [
                                   {
-                                      //   icon:()=> <Switch  onChange={(e,rowData)=>handleChange(e,rowData)} />,
-                                      icon: 'delete',
+                                      icon: () =>
+                                          new React.Component(
+                                              <Switch onChange={(e, rowData) => handleChange(e, rowData)} />,
+                                          ),
                                       tooltip: 'Suspend User',
                                       onClick: (e, rowData) => handleChange(e, rowData),
                                   },

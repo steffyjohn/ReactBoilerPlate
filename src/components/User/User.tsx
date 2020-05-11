@@ -149,11 +149,12 @@ function UserListingComponent(props: UserListingProps) {
                                   },
                               ]
                             : [
-                                  // {
-                                  //     icon:()=> <Switch   name="isChecked" />,
-                                  //     tooltip: 'Suspend User',
-                                  //     onClick: (e,rowData)=>handleChange(e,rowData),
-                                  // },
+                                  {
+                                      //   icon:()=> <Switch  onChange={(e,rowData)=>handleChange(e,rowData)} />,
+                                      icon: 'delete',
+                                      tooltip: 'Suspend User',
+                                      onClick: (e, rowData) => handleChange(e, rowData),
+                                  },
                               ]
                     }
                 />

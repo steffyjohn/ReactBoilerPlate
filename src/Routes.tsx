@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Base from './components/Layout/Base';
+import PageLoader from './components/Common/PageLoader';
 
 const waitFor = (Tag) => (props) => <Tag {...props} />;
 const Login = lazy(() => import('./pages/Login/index'));
@@ -27,7 +28,7 @@ const Routes = (props) => {
     });
     if (listofPages.indexOf(location.pathname) > -1) {
         return (
-            <Suspense fallback={<div>Loading</div>}>
+            <Suspense fallback={<PageLoader />}>
                 <Switch location={location}>
                     <Route path="/" component={waitFor(Login)} />
                     <Route path="/login" component={waitFor(Login)} />
@@ -38,7 +39,7 @@ const Routes = (props) => {
     return (
         <MuiThemeProvider theme={theme}>
             <Base {...props}>
-                <Suspense fallback={<div>Loading</div>}>
+                <Suspense fallback={<PageLoader />}>
                     <Switch location={location}>
                         <Route path="/home" component={waitFor(Home)} />
                         <Route path="/dashboard" component={waitFor(Dashboard)} />

@@ -26,7 +26,7 @@ function SignIn(props: SignInProps) {
             label: 'Password',
             valid: '["required"]',
             value: null,
-            isPassword: true,
+            password: true,
         },
     ]);
     const formSubmit = (e) => {

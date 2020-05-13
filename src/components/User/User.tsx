@@ -133,17 +133,17 @@ function UserListingComponent(props: UserListingProps) {
                     aria-describedby="scroll-dialog-description"
                 >
                     <DialogTitle id="scroll-dialog-title">{isNewUser ? 'Add User' : 'Edit User'}</DialogTitle>
-                    <DialogContent style={{ paddingBottom: '0' }} dividers={scroll === 'paper'}>
-                        <DialogContentText id="scroll-dialog-description" tabIndex={-1}>
-                            <AddUser
-                                onClose={() => setOpen(false)}
-                                isNewUser={isNewUser}
-                                onRowAdd={onRowAdd}
-                                list={list}
-                                onRowEdit={onRowEdit}
-                                {...props}
-                            />
-                        </DialogContentText>
+                    <DialogContent style={{ paddingBottom: '10px' }} dividers={scroll === 'paper'}>
+                        {/* <DialogContentText id="scroll-dialog-description" tabIndex={-1}> */}
+                        <AddUser
+                            onClose={() => setOpen(false)}
+                            isNewUser={isNewUser}
+                            onRowAdd={onRowAdd}
+                            list={list}
+                            onRowEdit={onRowEdit}
+                            {...props}
+                        />
+                        {/* </DialogContentText> */}
                     </DialogContent>
                 </Dialog>
             </div>

@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useStyles } from './ChangePasswordStyles';
 import FormContainer from './../../components/Form/FormContainer';
 import { showToast } from './../../core/config/Toast';
@@ -16,7 +16,7 @@ function ChangePassword() {
     const history = useHistory();
     const [view, setview] = useState<any>(null);
     const [formRegister, setformRegister] = useState({});
-    const [passwordChangeSuccess, setPasswordChangeSuccess] = useState(false);
+    // const [passwordChangeSuccess, setPasswordChangeSuccess] = useState(false);
     const [DataModel, setDataModel] = React.useState([
         {
             fieldType: 'input',
@@ -39,14 +39,9 @@ function ChangePassword() {
         },
     ]);
     const onNavigate = () => {
-        console.log('----h');
         history.push('/');
     };
-    useEffect(() => {
-        if (passwordChangeSuccess) {
-            onNavigate();
-        }
-    }, [passwordChangeSuccess]);
+
     const formSubmit = (e) => {
         const form = e.target;
         const inputs = [...form.elements].filter((i) => ['INPUT', 'SELECT'].includes(i.nodeName));
@@ -66,7 +61,7 @@ function ChangePassword() {
                 type: SUCCESS,
                 message: `Password changed successfully`,
                 oncloseToast: function () {
-                    setPasswordChangeSuccess(true);
+                    onNavigate();
                 },
                 cb: true,
             };
@@ -78,7 +73,7 @@ function ChangePassword() {
         <div>
             <Grid container component="main" className={classes.root}>
                 <Container component="main" maxWidth="xs" className={classes.color}>
-                    <CssBaseline /> <ToastContainer />
+                    <CssBaseline />
                     <div className={classes.paper}>
                         <Typography component="h1" variant="h5">
                             Change Password

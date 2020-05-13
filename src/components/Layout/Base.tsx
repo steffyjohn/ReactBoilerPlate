@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { ToastContainer, toast } from 'react-toastify';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Footer from './Footer/index';
 import { useStyles } from './CommonStyle';
@@ -13,6 +14,7 @@ function BaseLayout(props) {
     return (
         <div className={classes.root}>
             <CssBaseline />
+            <ToastContainer />
             <Header {...props} />
             <Sidebar {...props} />
             <main className={classes.content}>

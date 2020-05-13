@@ -9,10 +9,8 @@ export function showToast(toastValue) {
         autoClose: 500,
         onClose: () => {
             if (toastValue.cb) {
-                console.log('999');
                 toastValue.oncloseToast();
             }
-            // return  toastValue.cb?toastValue.oncloseToast():null
         },
     });
 }

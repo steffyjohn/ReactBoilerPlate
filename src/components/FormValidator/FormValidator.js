@@ -8,7 +8,7 @@ const FormValidator = {
 
         if (!name) throw new Error('Input name must not be empty.');
 
-        // const param = element.getAttribute("data-param");
+        const param = element.getAttribute('dataparam');
 
         const validations = JSON.parse(element.getAttribute('dataValidate'));
 
@@ -34,13 +34,15 @@ const FormValidator = {
                     case 'url':
                         result[m] = !validator.isURL(value);
                         break;
-
+                    case 'equalto':
+                        const value2 = document.getElementById(param).value;
+                        result[m] = !validator.equals(value, value2);
+                        break;
                     default:
                         throw new Error('Unrecognized validator.');
                 }
             });
         }
-        // console.log("resultresult",result,validations)
 
         return result;
     },
@@ -53,10 +55,10 @@ const FormValidator = {
             errors = { ...errors, [input.name]: result };
             if (!hasError) hasError = Object.keys(result).some((val) => result[val]);
         });
-        console.log('error', {
-            errors,
-            hasError,
-        });
+        // console.log('error', {
+        //     errors,
+        //     hasError,
+        // });
         return {
             errors,
             hasError,

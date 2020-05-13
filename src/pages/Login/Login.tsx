@@ -1,53 +1,50 @@
 import React, { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import validator from 'validator';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import { Avatar, Button, CssBaseline, Grid, Typography, Container } from '@material-ui/core';
 import { useStyles } from './LoginStyles';
-import { EMAIL_VALIDATION_ERROR } from './../../core/config/constants';
+import FormContainer from './../../components/Form/FormContainer';
 
 interface SignInProps {
     history: any;
 }
 function SignIn(props: SignInProps) {
     const classes = useStyles();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [isEmailError, setIsEmailError] = useState(false);
-    const [emailError, setEmailError] = useState('');
-    const [passwordError, setpasswordError] = useState(false);
+    const [view, setview] = useState<any>(null);
+    const [formRegister, setformRegister] = useState({});
+    const [DataModel, setDataModel] = useState([
+        {
+            fieldType: 'input',
+            inputType: 'text',
+            name: 'email',
+            label: 'Email',
+            valid: '["required","email"]',
+            value: null,
+        },
+        {
+            fieldType: 'input',
+            inputType: 'text',
+            name: 'password',
+            label: 'Password',
+            valid: '["required"]',
+            value: null,
+            isPassword: true,
+        },
+    ]);
+    const formSubmit = (e) => {
+        const form = e.target;
+        const inputs = [...form.elements].filter((i) => ['INPUT', 'SELECT'].includes(i.nodeName));
+        return inputs;
+    };
 
-    const onSubmit = (e) => {
+    const onSubmitForm = (e) => {
         e.preventDefault();
-        if (!email) {
-            setIsEmailError(true);
-        } else if (!validator.isEmail(email)) {
-            setIsEmailError(true);
-            setEmailError(EMAIL_VALIDATION_ERROR);
-        }
-        if (!password) {
-            setpasswordError(true);
-        }
+        const inputs = formSubmit(e);
+        setview(inputs);
+    };
+    const OnCompleteForm = (value) => {
+        const { email, password } = value;
+        setview(null);
         if (email && password) {
             props.history.push('/dashboard');
-        }
-    };
-    const onChange = (e) => {
-        const { name, value } = e.target;
-        if (name == 'email') {
-            setEmail(value);
-            if (isEmailError) {
-                setIsEmailError(false);
-            }
-        } else if (name == 'password') {
-            setPassword(value);
-            if (passwordError) {
-                setpasswordError(false);
-            }
         }
     };
     return (
@@ -61,33 +58,15 @@ function SignIn(props: SignInProps) {
                         Sign in
                     </Typography>
 
-                    <form className={classes.form} noValidate onSubmit={onSubmit}>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
-                            error={isEmailError}
-                            helperText={isEmailError ? emailError : ''}
-                            onChange={onChange}
+                    <form className={classes.form} noValidate onSubmit={onSubmitForm}>
+                        <FormContainer
+                            fields={DataModel}
+                            submit={view}
+                            cb={OnCompleteForm}
+                            cb2={() => setview(null)}
+                            formRegister={formRegister}
                         />
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                            error={passwordError}
-                            onChange={onChange}
-                        />
+
                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <Button
                                 type="submit"

@@ -77,6 +77,16 @@ export const useStyles = makeStyles((theme: Theme) =>
         icon: {
             color: 'white',
         },
+        paper: {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            marginRight: theme.spacing(1.5),
+        },
+        avatar: {
+            margin: theme.spacing(1),
+            backgroundColor: '#85908f',
+        },
     }),
 );
 

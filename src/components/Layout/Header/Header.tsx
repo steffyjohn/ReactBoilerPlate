@@ -1,15 +1,14 @@
 import React from 'react';
 import clsx from 'clsx';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Toolbar from '@material-ui/core/Toolbar';
-import Switch from '@material-ui/core/Switch';
-import IconButton from '@material-ui/core/IconButton';
+import { IconButton, FormControlLabel, AppBar, Switch, Toolbar, Menu, MenuItem, Button } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+
 import { withStyles } from '@material-ui/core/styles';
-import { FormControlLabel } from '@material-ui/core';
-import AppBar from '@material-ui/core/AppBar';
 import { useStyles } from './../CommonStyle';
-import { getToggleSettings, changeDefaultTheme } from './../../../slices/settingSlice';
+import { getToggleSettings, changeDefaultTheme, resetStore } from './../../../slices/settingSlice';
 import { DefaultStore } from './../../../core/model/store.model';
 
 interface HeaderProps {
@@ -18,14 +17,20 @@ interface HeaderProps {
     changeDefaultTheme: Function;
     isDefaultTheme: any;
 }
-
+const items = [
+    { name: 'Change Password', label: 'Change Password' },
+    { name: 'Log Out', label: 'Log Out' },
+];
 function Header(props: HeaderProps) {
     const [state, setState] = React.useState({
         isChecked: false,
     });
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
     const dispatch = useDispatch();
     const { isDefaultTheme } = useSelector((state: DefaultStore) => state.settings);
     const classes = useStyles();
+    const history = useHistory();
     const ToggleSwitch = withStyles({
         switchBase: {
             '&$checked + $track': {
@@ -42,7 +47,21 @@ function Header(props: HeaderProps) {
         dispatch(changeDefaultTheme({ isDefaultTheme: event.target.checked }));
         setState({ ...state, [event.target.name]: event.target.checked });
     };
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
 
+    const handleClose = (name) => {
+        console.log('_name', name);
+        if (name === 'Change Password') {
+            history.push('/change-password');
+        } else {
+            dispatch(resetStore({ isReset: true }));
+            history.push('/');
+        }
+
+        setAnchorEl(null);
+    };
     return (
         <AppBar
             position="fixed"
@@ -63,11 +82,40 @@ function Header(props: HeaderProps) {
                 >
                     <MenuIcon className={classes.icon} />
                 </IconButton>
-
-                <FormControlLabel
-                    control={<ToggleSwitch checked={state.isChecked} onChange={handleChange} name="isChecked" />}
-                    label=""
-                />
+                <div>
+                    <IconButton
+                        aria-controls="simple-menu"
+                        aria-haspopup="true"
+                        edge="start"
+                        size="medium"
+                        onClick={handleClick}
+                    >
+                        <AccountCircleIcon className={classes.icon} />
+                    </IconButton>
+                    <Menu
+                        id="simple-menu"
+                        anchorEl={anchorEl}
+                        keepMounted
+                        open={Boolean(anchorEl)}
+                        onClose={() => setAnchorEl(null)}
+                    >
+                        {items &&
+                            items.map((list, index) => {
+                                return (
+                                    <MenuItem key={index + 1} onClick={() => handleClose(list.name)}>
+                                        {list.label}
+                                    </MenuItem>
+                                );
+                            })}
+                        {/* <MenuItem onClick={handleClose}>Profile</MenuItem> */}
+                        {/* <MenuItem onClick={handleClose}>Change Password</MenuItem>
+        <MenuItem  onClick={handleClose}>Logout</MenuItem> */}
+                    </Menu>
+                    <FormControlLabel
+                        control={<ToggleSwitch checked={state.isChecked} onChange={handleChange} name="isChecked" />}
+                        label=""
+                    />
+                </div>
             </Toolbar>
         </AppBar>
     );

@@ -6,6 +6,13 @@ export function showToast(toastValue) {
         type: toastValue.type,
         position: DEFAULT_TOAST_POSITION,
         hideProgressBar: true,
-        autoClose: 1000,
+        autoClose: 500,
+        onClose: () => {
+            if (toastValue.cb) {
+                console.log('999');
+                toastValue.oncloseToast();
+            }
+            // return  toastValue.cb?toastValue.oncloseToast():null
+        },
     });
 }

@@ -6,6 +6,8 @@ const initialState: Settings = {
     open: true,
     isDefaultTheme: false,
     layout: getTheme('dark'),
+    isReset: false,
+    isCollapsed: false,
 };
 const settings = createSlice({
     name: 'settings',
@@ -20,7 +22,15 @@ const settings = createSlice({
             state.isDefaultTheme = isDefaultTheme;
             state.layout = !isDefaultTheme ? getTheme('dark') : getTheme('light');
         },
+        resetStore(state, action) {
+            const { isReset } = action.payload;
+            state.isReset = true;
+        },
+        setCollapsed(state, action) {
+            const { isCollapsed } = action.payload;
+            state.isReset = isCollapsed;
+        },
     },
 });
-export const { getToggleSettings, changeDefaultTheme } = settings.actions;
+export const { getToggleSettings, changeDefaultTheme, resetStore, setCollapsed } = settings.actions;
 export default settings.reducer;

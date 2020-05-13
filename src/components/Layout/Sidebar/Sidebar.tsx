@@ -3,7 +3,10 @@ import clsx from 'clsx';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import Drawer from '@material-ui/core/Drawer';
+import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
+import Paper from '@material-ui/core/Paper';
+import Collapse from '@material-ui/core/Collapse';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
@@ -34,6 +37,7 @@ function activeRoute(routeName) {
 }
 function Sidebar(props: SidebarProps) {
     const { open, isDefaultTheme } = useSelector((state: DefaultStore) => state.settings);
+    const [checked, setchecked] = React.useState(false);
     const dispatch = useDispatch();
     const classes = useStyles();
     const _theme = useTheme();
@@ -47,6 +51,7 @@ function Sidebar(props: SidebarProps) {
         dispatch(getToggleSettings({ open: false }));
     };
     const handleClick = (item) => {
+        setchecked(true);
         history.push(item.route);
     };
     React.useEffect(() => {
@@ -82,6 +87,15 @@ function Sidebar(props: SidebarProps) {
                 </div>
                 <Divider />
                 <List>
+                    {/* {open&&<Collapse in={checked}>
+                <div className={classes.paper}>
+                <Avatar className={classes.avatar}></Avatar> 
+                <span className={classes.icon}>Hi Steffy</span>
+               
+                     </div>   
+                  
+        
+        </Collapse>} */}
                     {Items.map((text, index) => (
                         <ListItem button key={text.label} onClick={() => handleClick(text)}>
                             <ListItemIcon

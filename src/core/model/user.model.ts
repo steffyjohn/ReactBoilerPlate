@@ -37,4 +37,6 @@ export interface Settings {
     open?: boolean;
     isDefaultTheme?: boolean;
     layout?: Record<string, any>;
+    isReset?: boolean;
+    isCollapsed?: boolean;
 }

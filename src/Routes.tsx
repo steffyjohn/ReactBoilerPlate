@@ -12,8 +12,8 @@ const Login = lazy(() => import('./pages/Login/index'));
 const Home = lazy(() => import('./pages/Home'));
 const Dashboard = lazy(() => import('./components/Dashboard/index'));
 const UserList = lazy(() => import('./components/User/index'));
-const Random = lazy(() => import('./components/Random'));
-
+const ChangePassword = lazy(() => import('./components/ChangePassword/index'));
+// const Random = lazy(() => import('./components/Random'));
 const Routes = (props) => {
     const { location } = props;
     const { layout, isDefaultTheme } = useSelector((state: DefaultStore) => state.settings);
@@ -47,7 +47,8 @@ const Routes = (props) => {
                         <Route path="/home" component={waitFor(Home)} />
                         <Route path="/dashboard" component={waitFor(Dashboard)} />
                         <Route path="/user" component={waitFor(UserList)} />
-                        <Route path="/random" component={waitFor(Random)} />
+                        <Route path="/change-password" component={waitFor(ChangePassword)} />
+                        {/* <Route path="/random" component={waitFor(Random)} /> */}
                     </Switch>
                 </Suspense>
             </Base>

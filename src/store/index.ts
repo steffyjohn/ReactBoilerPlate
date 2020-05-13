@@ -1,9 +1,18 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, applyMiddleware } from '@reduxjs/toolkit';
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
 
 import rootReducer from './rootReducer';
 
+const appReducer = (state, action) => {
+    if (action.type === 'settings/resetStore') {
+        state = undefined;
+    }
+    return rootReducer(state, action);
+};
 const store = configureStore({
-    reducer: rootReducer,
+    reducer: appReducer,
+    middleware: [thunk, logger],
 });
 
 export default store;

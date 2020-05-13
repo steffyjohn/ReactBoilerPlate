@@ -56,12 +56,17 @@ class FormContainer extends React.Component<FormContainerProps> {
     getErrorMessage = (inputName) => {
         const errorList = this.state.error[inputName];
         const errors: any = [];
+
         if (errorList) {
             Object.keys(errorList).forEach((key) => {
                 if (errorList[key] === true) {
                     if (key === 'required') {
                         errors.push('Field is required');
-                    } else if (key === 'equalto' && inputName === 'confirmpassword') {
+                    }
+                    // else if (key === 'password') {
+                    //     errors.push('Password must be atleast 8 characters, uppercase and lowercase letters, numbers and symbols');
+                    // }
+                    else if (key === 'equalto' && inputName === 'confirmpassword') {
                         errors.push('Passwords do not match');
                     } else {
                         errors.push(`Field should be  a valid ${key}`);

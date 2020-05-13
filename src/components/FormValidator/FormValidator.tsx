@@ -5,6 +5,7 @@ const FormValidator = {
         const isCheckbox = element.type === 'checkbox';
         const value = isCheckbox ? element.checked : element.value;
         const name = element.name;
+        // const PASSWORD_REGEX = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
         if (!name) throw new Error('Input name must not be empty.');
 
@@ -12,7 +13,7 @@ const FormValidator = {
 
         const validations = JSON.parse(element.getAttribute('dataValidate'));
 
-        const result = [];
+        const result: any = [];
         if (validations && validations.length) {
             validations.forEach((m) => {
                 switch (m) {
@@ -22,6 +23,7 @@ const FormValidator = {
                     case 'email':
                         result[m] = !validator.isEmail(value);
                         break;
+
                     case 'number':
                         result[m] = !validator.isNumeric(value);
                         break;
@@ -35,7 +37,9 @@ const FormValidator = {
                         result[m] = !validator.isURL(value);
                         break;
                     case 'equalto':
-                        const value2 = document.getElementById(param).value;
+                        // const value2 = document.getElementById(param).value;
+                        const _param: any = document.getElementById(param);
+                        const value2: any = _param.value;
                         result[m] = !validator.equals(value, value2);
                         break;
                     default:
@@ -43,7 +47,6 @@ const FormValidator = {
                 }
             });
         }
-
         return result;
     },
     bulkValidate(inputs) {

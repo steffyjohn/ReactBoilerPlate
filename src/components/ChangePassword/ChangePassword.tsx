@@ -5,7 +5,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import { toast } from 'react-toastify';
 import { useStyles } from './ChangePasswordStyles';
 import FormContainer from './../../components/Form/FormContainer';
 import { showToast } from './../../core/config/Toast';
@@ -16,7 +15,6 @@ function ChangePassword() {
     const history = useHistory();
     const [view, setview] = useState<any>(null);
     const [formRegister, setformRegister] = useState({});
-    // const [passwordChangeSuccess, setPasswordChangeSuccess] = useState(false);
     const [DataModel, setDataModel] = React.useState([
         {
             fieldType: 'input',

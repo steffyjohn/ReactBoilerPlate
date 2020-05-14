@@ -16,10 +16,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
             marginBottom: theme.spacing(1.5),
 
-            fontSize: '20px',
+            fontSize: '22px',
         },
         span: {
-            marginLeft: theme.spacing(1.5),
+            marginLeft: theme.spacing(1),
             fontWeight: 500,
         },
         iconButton: {

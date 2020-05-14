@@ -83,6 +83,10 @@ function Header(props: HeaderProps) {
                     <MenuIcon className={classes.icon} />
                 </IconButton>
                 <div>
+                    <FormControlLabel
+                        control={<ToggleSwitch checked={state.isChecked} onChange={handleChange} name="isChecked" />}
+                        label=""
+                    />
                     <IconButton
                         aria-controls="simple-menu"
                         aria-haspopup="true"
@@ -90,7 +94,7 @@ function Header(props: HeaderProps) {
                         size="medium"
                         onClick={handleClick}
                     >
-                        <AccountCircleIcon className={classes.icon} />
+                        <AccountCircleIcon className={classes.icon} style={{ fontSize: 35 }} />
                     </IconButton>
                     <Menu
                         id="simple-menu"
@@ -111,10 +115,6 @@ function Header(props: HeaderProps) {
                         {/* <MenuItem onClick={handleClose}>Change Password</MenuItem>
         <MenuItem  onClick={handleClose}>Logout</MenuItem> */}
                     </Menu>
-                    <FormControlLabel
-                        control={<ToggleSwitch checked={state.isChecked} onChange={handleChange} name="isChecked" />}
-                        label=""
-                    />
                 </div>
             </Toolbar>
         </AppBar>

@@ -37,9 +37,10 @@ export const useStyles = makeStyles((theme) => ({
     },
     submit: {
         margin: theme.spacing(1.5, 0, 2),
-        backgroundColor: '#26a69a',
-        '&:hover': {
-            backgroundColor: '#26a69abd',
-        },
+        color: 'white',
+        // backgroundColor: '#26a69a',
+        // '&:hover': {
+        //     backgroundColor: '#26a69abd',
+        // },
     },
 }));

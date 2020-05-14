@@ -25,16 +25,7 @@ function BaseLayout(props) {
         </div>
     );
 }
-
 BaseLayout.propTypes = {
     children: PropTypes.any,
 };
-
-const mapStateToProps = (state) => {
-    return {
-        open: state.settings.open,
-        theme: state.settings.isDefaultTheme,
-    };
-};
-
-export default connect(mapStateToProps, null)(BaseLayout);
+export default BaseLayout;

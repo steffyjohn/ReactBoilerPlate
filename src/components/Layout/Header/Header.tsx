@@ -28,7 +28,7 @@ function Header(props: HeaderProps) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
     const dispatch = useDispatch();
-    const { isDefaultTheme } = useSelector((state: DefaultStore) => state.settings);
+    const { isDefaultTheme, open } = useSelector((state: DefaultStore) => state.settings);
     const classes = useStyles();
     const history = useHistory();
     const ToggleSwitch = withStyles({
@@ -66,9 +66,9 @@ function Header(props: HeaderProps) {
         <AppBar
             position="fixed"
             className={clsx(classes.appBar, {
-                [classes.appBarShift]: !props.open,
+                [classes.appBarShift]: !open,
             })}
-            style={{ zIndex: props.open ? 1100 : 1300 }}
+            style={{ zIndex: open ? 1100 : 1300 }}
         >
             <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <IconButton
@@ -77,7 +77,7 @@ function Header(props: HeaderProps) {
                     onClick={handleDrawerOpen}
                     edge="start"
                     className={clsx(classes.menuButton, {
-                        [classes.hide]: props.open,
+                        [classes.hide]: open,
                     })}
                 >
                     <MenuIcon className={classes.icon} />

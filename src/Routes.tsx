@@ -28,7 +28,23 @@ const Routes = (props) => {
                 main: layout.secondary,
             },
         },
+        typography: {
+            fontFamily: [
+                'Heebo',
+                '-apple-system',
+                'BlinkMacSystemFont',
+                '"Segoe UI"',
+                'Roboto',
+                '"Helvetica Neue"',
+                'Arial',
+                'sans-serif',
+                '"Apple Color Emoji"',
+                '"Segoe UI Emoji"',
+                '"Segoe UI Symbol"',
+            ].join(','),
+        },
     });
+    console.log('theme', theme);
     if (listofPages.indexOf(location.pathname) > -1) {
         return (
             <Suspense fallback={<PageLoader />}>

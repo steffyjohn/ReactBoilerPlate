@@ -14,16 +14,17 @@ const useStyles = makeStyles((theme: Theme) =>
         paper: {
             padding: theme.spacing(2),
 
-            marginBottom: '10px',
+            marginBottom: theme.spacing(1.5),
 
             fontSize: '20px',
         },
         span: {
-            marginLeft: '10px',
+            marginLeft: theme.spacing(1.5),
+            fontWeight: 500,
         },
         iconButton: {
-            marginLeft: '5px',
-            marginBottom: '5px',
+            marginLeft: theme.spacing(0.5),
+            marginBottom: theme.spacing(0.5),
             padding: 0,
         },
     }),

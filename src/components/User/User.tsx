@@ -45,12 +45,12 @@ function UserListingComponent(props: UserListingProps) {
             { title: 'Role', field: 'Role' },
         ],
         data: [
-            { first: 'Steffy', last: 'John', Role: 'Manager', email: 'abc@gmal.com' },
+            { first: 'Steffy', last: 'John', Role: 'Manager', email: 'abc@gmail.com' },
             {
                 first: 'Zerya Betül',
                 last: 'Baran',
                 Role: 'Executives',
-                email: 'xyz@gmal.com',
+                email: 'xyz@gmail.com',
             },
         ],
     });
@@ -125,6 +125,11 @@ function UserListingComponent(props: UserListingProps) {
                             onClick: deleteUser,
                         },
                     ]}
+                    options={{
+                        headerStyle: {
+                            fontWeight: 'bold',
+                        },
+                    }}
                 />
                 <Dialog
                     open={open}

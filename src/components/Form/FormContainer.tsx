@@ -15,11 +15,55 @@ interface StateProps {
 }
 class FormContainer extends React.Component<FormContainerProps> {
     oldError;
+    submit = false;
     state: StateProps = {
         error: {},
         formRegister: this.props.formRegister ? this.props.formRegister : {},
     };
+    constructor(props) {
+        super(props);
+        this.props.fields.forEach(element => {
+            if (!this.state.formRegister.hasOwnProperty(element.name)) {
+                this.state.formRegister = {
+                    ...this.state.formRegister,
+                    [element.name]: element.value
+                        ? element.value
+                        : element.fieldType == "select"
+                            ? element.default
+                            ? element.options[0][element.default]:""
+                            : ""
+                };
+            }
+            this.state.error = { ...this.state.error, [element.name]: null };
+        });
+    }
+    componentWillReceiveProps(newProps, prevProps) {
+        if (newProps.formRegister !== this.props.formRegister) {
+            this.setState({
+              formRegister: newProps.formRegister ? newProps.formRegister : {}
+            });
+          }
+        if ( (JSON.stringify(prevProps.fields) != JSON.stringify(newProps.fields)) &&
+            !this.submit) {
+            newProps.fields&&newProps.fields.forEach(element => {
+               
+                    this.setState((prevState:any) => ({
+                        formRegister: {
+                          ...prevState.formRegister,
+                          [element.name]: element.value
+                          ? element.value
+                          : element.fieldType == "select"
+                          ? element.options[0][element.default]
+                          : element.value
+                        }
+                      }));
+               
+              });
+          }
+
+    }
     onChange = (data) => (event) => {
+        this.submit = true;
         const input = event.target;
         const value = input.value;
         const result = FormValidator.validate(input);
@@ -110,7 +154,9 @@ class FormContainer extends React.Component<FormContainerProps> {
             }
         }
     }
+    
     render() {
+
         if (this.props.fields.length) {
             return this.props.fields.map((data, index) => {
                 switch (data.fieldType) {
@@ -124,17 +170,43 @@ class FormContainer extends React.Component<FormContainerProps> {
                                 id={data.name}
                                 label={data.label}
                                 name={data.name}
+                                value={this.state.formRegister[data.name]}
                                 inputProps={{
                                     datavalidate: data.valid,
                                     dataparam: data.dataparam ? data.dataparam : '',
                                 }}
                                 error={this.hasError(data.name)}
                                 helperText={this.getErrorMessage(data.name)}
-                                required
                                 type={data.password ? 'password' : 'text'}
                                 onChange={this.onChange(data)}
                             />
                         );
+                    case 'select':
+                        return (
+                            <TextField
+                                id="standard-select-currency-native"
+                                select
+                                label={data.label}
+                                name={data.name}
+                                value={this.state.formRegister[data.name]}
+                                fullWidth
+                                onChange={this.onChange(data)}
+                                SelectProps={{
+                                    native: true,
+                                }}
+                            >
+                                
+                                {data.options &&
+                                    data.options.map((options, index) => (
+                                        <option
+                                            key={options.id ? options.id : index + 1}
+                                           
+                                        >
+                                            {data.default ? options[data.default] : options}
+                                        </option>
+                                    ))}
+                            </TextField>
+                        )
                 }
             });
         } else {

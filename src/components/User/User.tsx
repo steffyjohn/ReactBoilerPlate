@@ -37,6 +37,15 @@ function UserListingComponent(props: UserListingProps) {
     const [isNewUser, setIsNewUser] = React.useState(true);
     const [list, setList] = React.useState(_initial);
 
+    const descriptionElementRef = React.useRef<HTMLElement>(null);
+    React.useEffect(() => {
+        if (open) {
+            const { current: descriptionElement } = descriptionElementRef;
+            if (descriptionElement !== null) {
+                descriptionElement.focus();
+            }
+        }
+    }, [open]);
     const [state, setState] = React.useState<TableState>({
         columns: [
             { title: 'Name', field: 'first' },
@@ -138,7 +147,11 @@ function UserListingComponent(props: UserListingProps) {
                     aria-describedby="scroll-dialog-description"
                 >
                     <DialogTitle id="scroll-dialog-title">{isNewUser ? 'Add User' : 'Edit User'}</DialogTitle>
-                    <DialogContent style={{ paddingBottom: '10px' }} dividers={scroll === 'paper'}>
+                    <DialogContent
+                        style={{ paddingBottom: '10px' }}
+                        ref={descriptionElementRef}
+                        dividers={scroll === 'paper'}
+                    >
                         {/* <DialogContentText id="scroll-dialog-description" tabIndex={-1}> */}
                         <AddUser
                             onClose={() => setOpen(false)}

@@ -9,6 +9,15 @@ export const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1.5, 0, 1, 1),
         color: 'white',
     },
+    cancel: {
+        margin: theme.spacing(1.5, 0, 1, 1),
+        backgroundColor: 'white',
+        color: theme.palette.primary.main,
+        '&:hover': {
+            backgroundColor: 'white',
+            color: theme.palette.primary.main,
+        },
+    },
     select: {
         marginBottom: theme.spacing(2),
     },

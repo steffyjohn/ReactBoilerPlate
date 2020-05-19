@@ -138,7 +138,7 @@ function AddUser(props: AddUserProps) {
                     <Button
                         variant="contained"
                         color="primary"
-                        className={classes.submit}
+                        className={classes.cancel}
                         size={'large'}
                         onClick={() => props.onClose()}
                     >

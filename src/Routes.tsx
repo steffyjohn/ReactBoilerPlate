@@ -44,7 +44,6 @@ const Routes = (props) => {
             ].join(','),
         },
     });
-    console.log('theme', theme);
     if (listofPages.indexOf(location.pathname) > -1) {
         return (
             <Suspense fallback={<PageLoader />}>

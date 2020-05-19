@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,7 +10,7 @@ import Sidebar from './Sidebar/index';
 
 function BaseLayout(props) {
     const classes = useStyles();
-
+    const wrapper = React.useRef<any>(null);
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -18,7 +18,7 @@ function BaseLayout(props) {
             <Header {...props} />
             <Sidebar {...props} />
             <main className={classes.content}>
-                <div className={classes.toolbar} />
+                <div ref={wrapper} className={classes.toolbar} />
                 {props.children}
             </main>
             <Footer />

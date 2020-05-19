@@ -54,7 +54,6 @@ function Header(props: HeaderProps) {
     };
 
     const handleClose = (name) => {
-        console.log('_name', name);
         if (name === 'Change Password') {
             history.push('/change-password');
         } else {

@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button';
 import { useStyles, UserWrapper } from './Userstyles';
 import FormContainer from './../../components/Form/FormContainer';
 
-
 interface AddUserProps {
     list: { email?: string; first?: string; last?: string; Role?: string };
     isNewUser?: boolean;
@@ -60,23 +59,20 @@ function AddUser(props: AddUserProps) {
                     value: 'Executives',
                     label: 'Executives',
                 },
-
             ],
-            default: "label",
+            default: 'label',
             value: null,
         },
     ]);
     useEffect(() => {
         if (!props.isNewUser) {
-            DataModel.forEach(element => {
+            DataModel.forEach((element) => {
                 element.value = props.list[element.name];
 
                 setDataModel([...DataModel]);
             });
         }
-
-    }, [])
-
+    }, []);
 
     const formSubmit = (e) => {
         const form = e.target;
@@ -90,15 +86,13 @@ function AddUser(props: AddUserProps) {
         setview(inputs);
     };
     const OnCompleteForm = (value) => {
-
         setview(null);
         props.isNewUser ? props.onRowAdd(value) : props.onRowEdit(value, props.list);
         props.onClose();
     };
     return (
         <UserWrapper>
-
-            <form onSubmit={onSubmitForm} >
+            <form onSubmit={onSubmitForm}>
                 <FormContainer
                     fields={DataModel}
                     submit={view}
@@ -111,7 +105,7 @@ function AddUser(props: AddUserProps) {
                     <Button
                         variant="contained"
                         color="primary"
-                        className={classes.submit}
+                        className={classes.cancel}
                         size={'large'}
                         onClick={() => props.onClose()}
                     >

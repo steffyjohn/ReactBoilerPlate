@@ -7,3 +7,4 @@ export const SUCCESS = 'success';
 export const WARNING = 'warning';
 export const FIELD_REQUIRED = 'Field is required';
 export const EMAIL_VALIDATION_ERROR = 'Please provide a valid Email';
+export const LOGOUT_CONFIRMATION = 'Are you sure that you want to log out?';

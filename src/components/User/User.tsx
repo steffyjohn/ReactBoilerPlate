@@ -37,6 +37,15 @@ function UserListingComponent(props: UserListingProps) {
     const [isNewUser, setIsNewUser] = React.useState(true);
     const [list, setList] = React.useState(_initial);
 
+    const descriptionElementRef = React.useRef<any>(null);
+    React.useEffect(() => {
+        if (open) {
+            const { current: descriptionElement } = descriptionElementRef;
+            if (descriptionElement !== null) {
+                descriptionElement.focus();
+            }
+        }
+    }, [open]);
     const [state, setState] = React.useState<TableState>({
         columns: [
             { title: 'Name', field: 'first' },
@@ -131,27 +140,31 @@ function UserListingComponent(props: UserListingProps) {
                         },
                     }}
                 />
-                <Dialog
-                    open={open}
-                    scroll={scroll}
-                    aria-labelledby="scroll-dialog-title"
-                    aria-describedby="scroll-dialog-description"
-                >
-                    <DialogTitle id="scroll-dialog-title">{isNewUser ? 'Add User' : 'Edit User'}</DialogTitle>
-                    <DialogContent style={{ paddingBottom: '10px' }} dividers={scroll === 'paper'}>
-                        {/* <DialogContentText id="scroll-dialog-description" tabIndex={-1}> */}
-                        <AddUser
-                            onClose={() => setOpen(false)}
-                            isNewUser={isNewUser}
-                            onRowAdd={onRowAdd}
-                            list={list}
-                            onRowEdit={onRowEdit}
-                            {...props}
-                        />
-                        {/* </DialogContentText> */}
-                    </DialogContent>
-                </Dialog>
             </div>
+            <Dialog
+                open={open}
+                scroll={scroll}
+                aria-labelledby="scroll-dialog-title"
+                aria-describedby="scroll-dialog-description"
+            >
+                <DialogTitle id="scroll-dialog-title" style={{ fontWeight: 'bold' }}>
+                    {isNewUser ? 'Add User' : 'Edit User'}
+                </DialogTitle>
+                <DialogContent
+                    style={{ paddingBottom: '10px' }}
+                    ref={descriptionElementRef}
+                    dividers={scroll === 'paper'}
+                >
+                    <AddUser
+                        onClose={() => setOpen(false)}
+                        isNewUser={isNewUser}
+                        onRowAdd={onRowAdd}
+                        list={list}
+                        onRowEdit={onRowEdit}
+                        {...props}
+                    />
+                </DialogContent>
+            </Dialog>
         </UserWrapper>
     );
 }

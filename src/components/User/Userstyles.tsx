@@ -8,6 +8,18 @@ export const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(1.5, 0, 1, 1),
         color: 'white',
+        textTransform: 'none',
+    },
+    cancel: {
+        margin: theme.spacing(1.5, 0, 1, 1),
+        backgroundColor: 'white',
+        color: theme.palette.primary.main,
+        textTransform: 'none',
+        '&:hover': {
+            backgroundColor: 'white',
+            color: theme.palette.primary.main,
+            textTransform: 'none',
+        },
     },
     select: {
         marginBottom: theme.spacing(2),

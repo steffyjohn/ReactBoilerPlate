@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import swal from 'sweetalert';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { IconButton, FormControlLabel, AppBar, Switch, Toolbar, Menu, MenuItem, Button } from '@material-ui/core';
@@ -10,6 +11,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { useStyles } from './../CommonStyle';
 import { getToggleSettings, changeDefaultTheme, resetStore } from './../../../slices/settingSlice';
 import { DefaultStore } from './../../../core/model/store.model';
+import { LOGOUT_CONFIRMATION, WARNING } from './../../../core/config/constants';
 
 interface HeaderProps {
     open: boolean;
@@ -28,7 +30,7 @@ function Header(props: HeaderProps) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
     const dispatch = useDispatch();
-    const { isDefaultTheme, open } = useSelector((state: DefaultStore) => state.settings);
+    const { isDefaultTheme, open, layout } = useSelector((state: DefaultStore) => state.settings);
     const classes = useStyles();
     const history = useHistory();
     const ToggleSwitch = withStyles({
@@ -52,12 +54,23 @@ function Header(props: HeaderProps) {
     };
 
     const handleClose = (name) => {
-        console.log('_name', name);
         if (name === 'Change Password') {
             history.push('/change-password');
         } else {
-            dispatch(resetStore({ isReset: true }));
-            history.push('/');
+            swal({
+                text: LOGOUT_CONFIRMATION,
+                icon: WARNING,
+                buttons: {
+                    confirm: {
+                        className: layout.primary,
+                    },
+                },
+            }).then((isLogOut) => {
+                if (isLogOut) {
+                    dispatch(resetStore({ isReset: true }));
+                    history.push('/');
+                }
+            });
         }
 
         setAnchorEl(null);

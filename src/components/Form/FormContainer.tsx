@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { TextField } from '@material-ui/core';
-import FormValidator from '../FormValidator/FormValidator';
+import FormValidator from './../../core/config/FormValidator/FormValidator';
 
 interface FormContainerProps {
     submit: any;
@@ -11,59 +11,62 @@ interface FormContainerProps {
 }
 interface StateProps {
     error: any;
-    formRegister: any;
 }
-class FormContainer extends React.Component<FormContainerProps> {
-    oldError;
-    submit = false;
-    state: StateProps = {
-        error: {},
-        formRegister: this.props.formRegister ? this.props.formRegister : {},
-    };
-    constructor(props) {
-        super(props);
-        this.props.fields.forEach(element => {
-            if (!this.state.formRegister.hasOwnProperty(element.name)) {
-                this.state.formRegister = {
-                    ...this.state.formRegister,
-                    [element.name]: element.value
-                        ? element.value
-                        : element.fieldType == "select"
-                            ? element.default
-                            ? element.options[0][element.default]:""
-                            : ""
-                };
-            }
-            this.state.error = { ...this.state.error, [element.name]: null };
-        });
-    }
-    componentWillReceiveProps(newProps, prevProps) {
-        if (newProps.formRegister !== this.props.formRegister) {
-            this.setState({
-              formRegister: newProps.formRegister ? newProps.formRegister : {}
-            });
-          }
-        if ( (JSON.stringify(prevProps.fields) != JSON.stringify(newProps.fields)) &&
-            !this.submit) {
-            newProps.fields&&newProps.fields.forEach(element => {
-               
-                    this.setState((prevState:any) => ({
-                        formRegister: {
-                          ...prevState.formRegister,
-                          [element.name]: element.value
-                          ? element.value
-                          : element.fieldType == "select"
-                          ? element.options[0][element.default]
-                          : element.value
-                        }
-                      }));
-               
-              });
-          }
+function FormContainer(props: FormContainerProps) {
+    let oldError: any;
+    let submit: any = false;
 
-    }
-    onChange = (data) => (event) => {
-        this.submit = true;
+    const reducer = (prevState, updatedProperty) => ({
+        ...prevState,
+        ...updatedProperty,
+    });
+    const initState: StateProps = {
+        error: {},
+    };
+
+    const [state, setState] = useReducer(reducer, initState);
+    const [formRegister, setformRegister] = useReducer(reducer, {});
+
+    useEffect(() => {
+        if (!submit) {
+            props.fields &&
+                props.fields.forEach((element) => {
+                    setformRegister({
+                        [element.name]: element.value
+                            ? element.value
+                            : element.fieldType == 'select'
+                            ? element.options[0][element.default]
+                            : element.value,
+                    });
+                });
+        }
+    }, [props.fields]);
+    useEffect(() => {
+        if (props.submit) {
+            const { errors, hasError } = FormValidator.bulkValidate(props.submit);
+            let payload = formRegister;
+            if (hasError) {
+                props.cb2();
+                if (oldError != JSON.stringify(errors)) {
+                    oldError = JSON.stringify(errors);
+                    payload = null;
+                    const truthyItems = Object.keys(errors).forEach((fields) => {
+                        Object.keys(errors[fields]).forEach((key) => {
+                            if (errors[fields][key]) {
+                                setState({
+                                    error: errors,
+                                });
+                            }
+                        });
+                    });
+                }
+            } else {
+                props.cb(payload);
+            }
+        }
+    }, [props.submit]);
+    const onChange = (data) => (event) => {
+        submit = true;
         const input = event.target;
         const value = input.value;
         const result = FormValidator.validate(input);
@@ -71,19 +74,16 @@ class FormContainer extends React.Component<FormContainerProps> {
         if (Object.values(result).includes(true)) {
             errorType = result;
         }
-        this.setState(() => ({
+        setState({
             error: {
-                ...this.state.error,
+                ...state.error,
                 [input.name]: errorType,
             },
-            formRegister: {
-                ...this.state.formRegister,
-                [input.name]: value,
-            },
-        }));
+        });
+        setformRegister({ [input.name]: value });
     };
-    hasError = (inputName) => {
-        const errorList = this.state.error[inputName];
+    const hasError = (inputName) => {
+        const errorList = state.error[inputName];
         let errors;
         if (errorList) {
             Object.keys(errorList).forEach((key) => {
@@ -97,8 +97,8 @@ class FormContainer extends React.Component<FormContainerProps> {
 
         return errors;
     };
-    getErrorMessage = (inputName) => {
-        const errorList = this.state.error[inputName];
+    const getErrorMessage = (inputName) => {
+        const errorList = state.error[inputName];
         const errors: any = [];
 
         if (errorList) {
@@ -130,88 +130,58 @@ class FormContainer extends React.Component<FormContainerProps> {
             })
         );
     };
-    componentDidUpdate() {
-        if (this.props.submit) {
-            const { errors, hasError } = FormValidator.bulkValidate(this.props.submit);
-            let payload = this.state.formRegister;
-            if (hasError) {
-                this.props.cb2();
-                if (this.oldError != JSON.stringify(errors)) {
-                    this.oldError = JSON.stringify(errors);
-                    payload = null;
-                    const truthyItems = Object.keys(errors).forEach((fields) => {
-                        Object.keys(errors[fields]).forEach((key) => {
-                            if (errors[fields][key]) {
-                                this.setState((prevState) => ({
-                                    error: errors,
-                                }));
-                            }
-                        });
-                    });
-                }
-            } else {
-                this.props.cb(payload);
-            }
-        }
-    }
-    
-    render() {
 
-        if (this.props.fields.length) {
-            return this.props.fields.map((data, index) => {
-                switch (data.fieldType) {
-                    case 'input':
-                        return (
-                            <TextField
-                                key={index}
-                                variant={data.variant ? data.variant : 'outlined'}
-                                margin="normal"
-                                fullWidth
-                                id={data.name}
-                                label={data.label}
-                                name={data.name}
-                                value={this.state.formRegister[data.name]}
-                                inputProps={{
-                                    datavalidate: data.valid,
-                                    dataparam: data.dataparam ? data.dataparam : '',
-                                }}
-                                error={this.hasError(data.name)}
-                                helperText={this.getErrorMessage(data.name)}
-                                type={data.password ? 'password' : 'text'}
-                                onChange={this.onChange(data)}
-                            />
-                        );
-                    case 'select':
-                        return (
-                            <TextField
-                                id="standard-select-currency-native"
-                                select
-                                label={data.label}
-                                name={data.name}
-                                value={this.state.formRegister[data.name]}
-                                fullWidth
-                                onChange={this.onChange(data)}
-                                SelectProps={{
-                                    native: true,
-                                }}
-                            >
-                                
-                                {data.options &&
-                                    data.options.map((options, index) => (
-                                        <option
-                                            key={options.id ? options.id : index + 1}
-                                           
-                                        >
-                                            {data.default ? options[data.default] : options}
-                                        </option>
-                                    ))}
-                            </TextField>
-                        )
-                }
-            });
-        } else {
-            return <React.Fragment />;
-        }
+    if (props.fields.length) {
+        return props.fields.map((data, index) => {
+            switch (data.fieldType) {
+                case 'input':
+                    return (
+                        <TextField
+                            key={index}
+                            variant={data.variant ? data.variant : 'outlined'}
+                            margin="normal"
+                            fullWidth
+                            id={data.name}
+                            label={data.label}
+                            name={data.name}
+                            value={formRegister[data.name]}
+                            inputProps={{
+                                datavalidate: data.valid,
+                                dataparam: data.dataparam ? data.dataparam : '',
+                            }}
+                            error={hasError(data.name)}
+                            helperText={getErrorMessage(data.name)}
+                            type={data.password ? 'password' : 'text'}
+                            onChange={onChange(data)}
+                        />
+                    );
+                case 'select':
+                    return (
+                        <TextField
+                            id="standard-select-currency-native"
+                            select
+                            key={index}
+                            label={data.label}
+                            name={data.name}
+                            value={formRegister[data.name]}
+                            fullWidth
+                            onChange={onChange(data)}
+                            SelectProps={{
+                                native: true,
+                            }}
+                        >
+                            {data.options &&
+                                data.options.map((options, index) => (
+                                    <option key={options.id ? options.id : index + 1}>
+                                        {data.default ? options[data.default] : options}
+                                    </option>
+                                ))}
+                        </TextField>
+                    );
+            }
+        });
+    } else {
+        return <React.Fragment />;
     }
 }
 

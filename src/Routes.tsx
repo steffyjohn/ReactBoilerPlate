@@ -9,7 +9,6 @@ import { DefaultStore } from './core/model/store.model';
 
 const waitFor = (Tag) => (props) => <Tag {...props} />;
 const Login = lazy(() => import('./pages/Login/index'));
-const Home = lazy(() => import('./pages/Home'));
 const Dashboard = lazy(() => import('./components/Dashboard/index'));
 const UserList = lazy(() => import('./components/User/index'));
 const ChangePassword = lazy(() => import('./components/ChangePassword/index'));
@@ -44,7 +43,6 @@ const Routes = (props) => {
             ].join(','),
         },
     });
-    console.log('theme', theme);
     if (listofPages.indexOf(location.pathname) > -1) {
         return (
             <Suspense fallback={<PageLoader />}>
@@ -60,7 +58,6 @@ const Routes = (props) => {
             <Base {...props}>
                 <Suspense fallback={<PageLoader />}>
                     <Switch location={location}>
-                        <Route path="/home" component={waitFor(Home)} />
                         <Route path="/dashboard" component={waitFor(Dashboard)} />
                         <Route path="/user" component={waitFor(UserList)} />
                         <Route path="/change-password" component={waitFor(ChangePassword)} />

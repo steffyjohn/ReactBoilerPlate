@@ -58,10 +58,7 @@ const FormValidator = {
             errors = { ...errors, [input.name]: result };
             if (!hasError) hasError = Object.keys(result).some((val) => result[val]);
         });
-        // console.log('error', {
-        //     errors,
-        //     hasError,
-        // });
+
         return {
             errors,
             hasError,

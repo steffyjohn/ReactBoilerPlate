@@ -10,7 +10,7 @@ const appReducer = (state, action) => {
     }
     return rootReducer(state, action);
 };
-const store = configureStore({
+const store: any = configureStore({
     reducer: appReducer,
     middleware: [thunk, logger],
 });

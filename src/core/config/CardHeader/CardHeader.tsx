@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
@@ -29,7 +28,12 @@ const useStyles = makeStyles((theme: Theme) =>
         },
     }),
 );
-function CardHeader(props) {
+interface CardHeaderProps {
+    title?: string;
+    permssion?: boolean;
+    onClick?: any;
+}
+function CardHeader(props: CardHeaderProps) {
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -47,9 +51,5 @@ function CardHeader(props) {
         </div>
     );
 }
-CardHeader.propTypes = {
-    title: PropTypes.string,
-    permssion: PropTypes.bool,
-    onClick: PropTypes.func,
-};
+
 export default CardHeader;

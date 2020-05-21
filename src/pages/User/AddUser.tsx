@@ -22,7 +22,7 @@ function AddUser(props: AddUserProps) {
             label: 'First Name',
             name: 'first',
             valid: '["required"]',
-            value: null,
+            value: undefined,
         },
         {
             fieldType: 'input',
@@ -30,7 +30,7 @@ function AddUser(props: AddUserProps) {
             label: 'Last Name',
             name: 'last',
             valid: '["required"]',
-            value: null,
+            value: undefined,
         },
 
         {
@@ -39,7 +39,7 @@ function AddUser(props: AddUserProps) {
             name: 'email',
             label: 'Email',
             valid: '["required","email"]',
-            value: null,
+            value: undefined,
         },
         {
             fieldType: 'select',
@@ -61,7 +61,7 @@ function AddUser(props: AddUserProps) {
                 },
             ],
             default: 'label',
-            value: null,
+            value: undefined,
         },
     ]);
     useEffect(() => {

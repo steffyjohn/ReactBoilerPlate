@@ -1,14 +1,12 @@
-import React, { useRef } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { ToastContainer, toast } from 'react-toastify';
+import React from 'react';
+import { ToastContainer } from 'react-toastify';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Footer from './Footer/index';
 import { useStyles } from './CommonStyle';
 import Header from './Header/index';
 import Sidebar from './Sidebar/index';
 
-function BaseLayout(props) {
+function BaseLayout(props: any) {
     const classes = useStyles();
     const wrapper = React.useRef<any>(null);
     return (
@@ -25,7 +23,5 @@ function BaseLayout(props) {
         </div>
     );
 }
-BaseLayout.propTypes = {
-    children: PropTypes.any,
-};
+
 export default BaseLayout;

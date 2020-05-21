@@ -42,7 +42,7 @@ function CardHeader(props: CardHeaderProps) {
                     <span className={classes.span}>{props.title}</span>
 
                     {props.permssion && (
-                        <IconButton className={classes.iconButton} onClick={() => props.onClick()}>
+                        <IconButton className={classes.iconButton} size="medium" onClick={() => props.onClick()}>
                             <AddCircleIcon color="primary" />
                         </IconButton>
                     )}

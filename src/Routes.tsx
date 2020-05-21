@@ -8,7 +8,7 @@ import useCommonTheme from './core/config/CommonTheme';
 
 const waitFor = (Tag) => (props) => <Tag {...props} />;
 
-const Routes = (props) => {
+const Routes = (props: RoutesProps) => {
     const { location } = props;
     const listofPages = ['/', '/login'];
     const theme = useCommonTheme();
@@ -27,24 +27,19 @@ const Routes = (props) => {
             <Base {...props}>
                 <Suspense fallback={<PageLoader />}>
                     <Switch location={location}>
-                        <Route
-                            path="/dashboard"
-                            component={waitFor(lazy(() => import('./components/Dashboard/index')))}
-                        />
-                        <Route path="/user" component={waitFor(lazy(() => import('./components/User/index')))} />
-                        <Route
-                            path="/change-password"
-                            component={lazy(() => import('./components/ChangePassword/index'))}
-                        />
+                        <Route path="/dashboard" component={waitFor(lazy(() => import('./pages/Dashboard/index')))} />
+                        <Route path="/user" component={waitFor(lazy(() => import('./pages/User/index')))} />
+                        <Route path="/change-password" component={lazy(() => import('./pages/ChangePassword/index'))} />
                     </Switch>
                 </Suspense>
             </Base>
         </MuiThemeProvider>
     );
 };
-Routes.propTypes = {
-    location: PropTypes.object,
+const RoutePropTypes = {
+    location: PropTypes.any,
     layout: PropTypes.object,
 };
+type RoutesProps = PropTypes.InferProps<typeof RoutePropTypes>;
 
 export default withRouter(Routes);

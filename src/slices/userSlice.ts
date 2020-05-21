@@ -3,10 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import { UserAuth } from '../core/model/user.model';
 
 import fetch from '../core/interceptor';
-import { showToaster } from './toasterSlice';
 
 // const savedName = localStorage.getItem('session.name');
-const savedName = "Reshma";
+const savedName = 'Reshma';
 // const savedToken = localStorage.getItem('session.token');
 const savedToken = '123456';
 const initialState: UserAuth = {
@@ -61,19 +60,11 @@ export const signIn = ({ username, password }) => async (dispatch) => {
         });
 
         dispatch(getLoginSuccess({ ...response }));
-        dispatch(showToaster({ message: `Welcome ${response.name}!` }));
-    } catch (error) {
-        dispatch(
-            showToaster({
-                message: 'Unable to sign in. Please try again.',
-            }),
-        );
-    }
+    } catch (error) {}
 };
 
 export const logout = () => async (dispatch, getState) => {
     dispatch(getLogoutSuccess());
-    dispatch(showToaster({ message: 'Sign out successful' }));
 
     try {
         const token = getState().session.token;
@@ -101,12 +92,5 @@ export const signUp = ({ name, email, password }) => async (dispatch) => {
         });
 
         dispatch(getSignupSuccess());
-        dispatch(showToaster({ message: `Sign up successful!` }));
-    } catch (error) {
-        dispatch(
-            showToaster({
-                message: 'Unable to sign up. Please try again.',
-            }),
-        );
-    }
+    } catch (error) {}
 };

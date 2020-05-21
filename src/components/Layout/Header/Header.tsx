@@ -60,7 +60,14 @@ function Header(props: HeaderProps) {
             swal({
                 text: LOGOUT_CONFIRMATION,
                 icon: WARNING,
+
                 buttons: {
+                    cancel: {
+                        text: 'Cancel',
+                        value: null,
+                        visible: true,
+                        closeModal: true,
+                    },
                     confirm: {
                         className: layout.primary,
                     },

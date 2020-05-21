@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
 import { TextField } from '@material-ui/core';
-import FormValidator from './../../core/config/FormValidator/FormValidator';
+import FormValidator from './../utils/FormValidator/FormValidator';
 
 interface FormContainerProps {
     submit: any;
@@ -69,15 +69,11 @@ function FormContainer(props: FormContainerProps) {
         submit = true;
         const input = event.target;
         const value = input.value;
-        const result = FormValidator.validate(input);
-        let errorType: any = null;
-        if (Object.values(result).includes(true)) {
-            errorType = result;
-        }
+
         setState({
             error: {
                 ...state.error,
-                [input.name]: errorType,
+                [input.name]: null,
             },
         });
         setformRegister({ [input.name]: value });
@@ -130,7 +126,19 @@ function FormContainer(props: FormContainerProps) {
             })
         );
     };
-
+    const onBlur = (data) => (event) => {
+        const result = FormValidator.validate(event.target);
+        let errorType: any = null;
+        if (Object.values(result).includes(true)) {
+            errorType = result;
+        }
+        setState({
+            error: {
+                ...state.error,
+                [event.target.name]: errorType,
+            },
+        });
+    };
     if (props.fields.length) {
         return props.fields.map((data, index) => {
             switch (data.fieldType) {
@@ -149,6 +157,7 @@ function FormContainer(props: FormContainerProps) {
                                 datavalidate: data.valid,
                                 dataparam: data.dataparam ? data.dataparam : '',
                             }}
+                            onBlur={onBlur(data)}
                             error={hasError(data.name)}
                             helperText={getErrorMessage(data.name)}
                             type={data.password ? 'password' : 'text'}
@@ -166,6 +175,7 @@ function FormContainer(props: FormContainerProps) {
                             value={formRegister[data.name]}
                             fullWidth
                             onChange={onChange(data)}
+                            onBlur={onBlur(data)}
                             SelectProps={{
                                 native: true,
                             }}

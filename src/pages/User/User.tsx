@@ -3,14 +3,14 @@ import MaterialTable, { Column } from 'material-table';
 import { ToastContainer } from 'react-toastify';
 import swal from 'sweetalert';
 import Dialog, { DialogProps } from '@material-ui/core/Dialog';
-import { DialogContent, DialogContentText, DialogTitle, NativeSelect } from '@material-ui/core';
+import { DialogContent, DialogTitle } from '@material-ui/core';
 import { useSelector } from 'react-redux';
-import CardHeader from './../../core/config/CardHeader/CardHeader';
+import CardHeader from './../../components/CardHeader/CardHeader';
 import { useStyles, UserWrapper } from './Userstyles';
 import AddUser from './AddUser';
-import { showToast } from './../../core/config/Toast';
-import { SUCCESS, DELETE_CONFIRMATION, WARNING } from './../../core/config/constants';
-import { DefaultStore } from './../../core/model/store.model';
+import { showToast } from '../../core/config/Toast';
+import { SUCCESS, DELETE_CONFIRMATION, WARNING } from '../../core/config/constants';
+import { DefaultStore } from '../../core/model/store.model';
 
 interface Row {
     first: string;
@@ -68,6 +68,12 @@ function UserListingComponent(props: UserListingProps) {
             text: DELETE_CONFIRMATION,
             icon: WARNING,
             buttons: {
+                cancel: {
+                    text: 'Cancel',
+                    value: null,
+                    visible: true,
+                    closeModal: true,
+                },
                 confirm: {
                     className: layout.primary,
                 },

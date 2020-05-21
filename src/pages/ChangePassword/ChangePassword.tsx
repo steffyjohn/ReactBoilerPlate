@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -22,7 +22,7 @@ function ChangePassword() {
             name: 'password',
             label: 'Password',
             valid: '["required"]',
-            value: null,
+            value: undefined,
             password: true,
         },
         {
@@ -32,7 +32,7 @@ function ChangePassword() {
             label: 'Confirm Password',
             valid: '["required","equalto"]',
             dataparam: 'password',
-            value: null,
+            value: undefined,
             password: true,
         },
     ]);

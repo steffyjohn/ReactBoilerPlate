@@ -17,7 +17,7 @@ function SignIn(props: SignInProps) {
             name: 'email',
             label: 'Email',
             valid: '["required","email"]',
-            value: null,
+            value: undefined,
         },
         {
             fieldType: 'input',
@@ -25,7 +25,7 @@ function SignIn(props: SignInProps) {
             name: 'password',
             label: 'Password',
             valid: '["required"]',
-            value: null,
+            value: undefined,
             password: true,
         },
     ]);

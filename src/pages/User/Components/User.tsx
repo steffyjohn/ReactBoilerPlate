@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 import Dialog, { DialogProps } from '@material-ui/core/Dialog';
 import { DialogContent, DialogTitle } from '@material-ui/core';
 import { useSelector } from 'react-redux';
-import CardHeader from '../../../components/CardHeader/CardHeader';
+import CardHeader from '../../../components/CardHeader/Component';
 import { useStyles, UserWrapper } from './../style';
 import AddUser from './AddUser';
 import { showToast } from './../../../core/config/Toast';

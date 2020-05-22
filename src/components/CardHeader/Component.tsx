@@ -3,7 +3,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { useStyles } from './CardHeaderStyle';
+import { useStyles } from './style';
 
 interface CardHeaderProps {
     title?: string;

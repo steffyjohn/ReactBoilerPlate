@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
 import { TextField } from '@material-ui/core';
-import FormValidator from './../../utils/FormValidator/FormValidator';
+import FormValidator from '../../utils/FormValidator/Component';
 
 interface FormContainerProps {
     submit: any;

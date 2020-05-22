@@ -8,9 +8,9 @@ import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import { useTheme } from '@material-ui/core/styles';
-import { getToggleSettings } from './../../../slices/settingSlice';
+import { getToggleSettings } from '../../../slices/settingSlice';
 import { useHistory } from 'react-router-dom';
-import { useStyles } from './../CommonStyle';
+import { useStyles } from '../CommonStyle';
 import { DefaultStore } from '../../../core/Interface/store.interface';
 
 interface SidebarProps {

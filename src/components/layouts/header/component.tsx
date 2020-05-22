@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import swal from 'sweetalert';
-import { useHistory } from './node_modules/react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { IconButton, FormControlLabel, AppBar, Switch, Toolbar, Menu, MenuItem, Button } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';

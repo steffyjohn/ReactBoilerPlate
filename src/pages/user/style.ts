@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import styled from '../../components/layouts/sidebars/node_modules/styled-components';
+import styled from 'styled-components';
 
 export const useStyles = makeStyles((theme) => ({
     table: {

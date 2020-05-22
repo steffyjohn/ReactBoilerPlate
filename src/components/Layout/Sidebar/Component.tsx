@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import { common, blueGrey } from '@material-ui/core/colors';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import Drawer from '@material-ui/core/Drawer';
@@ -10,7 +11,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import { useTheme } from '@material-ui/core/styles';
 import { getToggleSettings } from '../../../slices/settingSlice';
 import { useHistory } from 'react-router-dom';
-import { useStyles } from '../CommonStyle';
+import { useStyles } from '../commonStyle';
 import { DefaultStore } from '../../../core/Interface/store.interface';
 
 interface SidebarProps {
@@ -34,6 +35,7 @@ function Sidebar(props: SidebarProps) {
     const classes = useStyles();
     const _theme = useTheme();
     const history = useHistory();
+    const { white, black } = common;
     const Wrapper = styled.div`
         .MuiDrawer-paperAnchorDockedLeft {
             background-color: ${_theme.palette.secondary.main};
@@ -74,7 +76,7 @@ function Sidebar(props: SidebarProps) {
             >
                 <div className={classes.color}>
                     <IconButton onClick={handleDrawerClose}>
-                        <MenuOpenIcon style={{ color: open ? 'white' : 'black' }} />
+                        <MenuOpenIcon style={{ color: open ? white : black }} />
                     </IconButton>
                 </div>
                 <Divider />
@@ -86,8 +88,8 @@ function Sidebar(props: SidebarProps) {
                                     color: activeRoute(text.route)
                                         ? _theme.palette.primary.main
                                         : isDefaultTheme
-                                        ? '#515253'
-                                        : 'white',
+                                        ? blueGrey[600]
+                                        : white,
                                 }}
                             >
                                 {text.Icon}
@@ -97,8 +99,8 @@ function Sidebar(props: SidebarProps) {
                                     color: activeRoute(text.route)
                                         ? _theme.palette.primary.main
                                         : isDefaultTheme
-                                        ? 'rgba(81, 82, 83, 0.66)'
-                                        : '#e0dede',
+                                        ? blueGrey[600]
+                                        : blueGrey[50],
                                 }}
                                 primary={text.label}
                             />

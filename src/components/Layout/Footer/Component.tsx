@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { FooterStyles } from './../CommonStyle';
+import { FooterStyles } from '../commonStyle';
 import { DefaultStore } from '../../../core/Interface/store.interface';
 export default function Footer(props: any) {
     const classes = FooterStyles(props);

@@ -6,8 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { useStyles } from './style';
-import FormContainer from '../../components/Form/FormContainer';
-import { showToast } from '../../core/config/Toast';
+import FormContainer from '../../components/form/formContainer';
+import { showToast } from '../../utils/utilities';
 import { SUCCESS } from '../../core/config/constants';
 
 function ChangePassword() {

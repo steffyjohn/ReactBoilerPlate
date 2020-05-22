@@ -1,2 +1,2 @@
-import Header from './Component';
+import Header from './component';
 export default Header;

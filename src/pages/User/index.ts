@@ -1,2 +1,4 @@
-import UserList from './Components/User';
+import loadable from '@loadable/component';
+const UserList = loadable(() => import('./components/user'));
+
 export default UserList;

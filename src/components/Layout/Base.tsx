@@ -1,10 +1,10 @@
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Footer from './Footer/index';
-import { useStyles } from './CommonStyle';
-import Header from './Header/index';
-import Sidebar from './Sidebar/index';
+import Footer from './footer/index';
+import { useStyles } from './commonStyle';
+import Header from './header/index';
+import Sidebar from './sidebar/index';
 
 function BaseLayout(props: any) {
     const classes = useStyles();

@@ -3,12 +3,12 @@ import loadable from '@loadable/component';
 import { withRouter, Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { MuiThemeProvider } from '@material-ui/core/styles';
-import Base from './components/layout/base';
+import Base from './components/layouts/base';
 import useCommonTheme from './core/config/commonTheme';
-import Login from './pages/login/index';
-import Dashboard from './pages/dashboard/index';
-import User from './pages/user/index';
-import ChangePassword from './pages/changePassword/index';
+import Login from './pages/logins/index';
+import Dashboard from './pages/dashboards/index';
+import User from './pages/users/index';
+import ChangePassword from './pages/changePasswords/index';
 
 // const waitFor = (Tag) => (props) => <Tag {...props} />;
 

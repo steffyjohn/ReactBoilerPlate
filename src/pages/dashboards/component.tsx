@@ -1,5 +1,5 @@
 import React from 'react';
-import CardHeader from '../../components/cardHeader/index';
+import CardHeader from '../../components/cardHeaders/index';
 
 class Dashboard extends React.Component {
     render() {

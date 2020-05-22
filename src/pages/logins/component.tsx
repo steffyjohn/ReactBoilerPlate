@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Avatar, Button, CssBaseline, Grid, Typography, Container } from '@material-ui/core';
 import { useStyles } from './style';
-import FormContainer from '../../components/form/formContainer';
+import FormContainer from '../../components/forms/formContainer';
 
 interface SignInProps {
     history: any;

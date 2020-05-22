@@ -1,3 +1,3 @@
-import ChangePassword from './ChangePassword';
+import ChangePassword from './Component';
 
 export default ChangePassword;

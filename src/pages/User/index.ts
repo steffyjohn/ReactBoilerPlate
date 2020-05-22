@@ -1,2 +1,2 @@
-import UserList from './User';
+import UserList from './Components/User';
 export default UserList;

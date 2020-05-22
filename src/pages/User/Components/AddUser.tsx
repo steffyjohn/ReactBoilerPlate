@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
-import { useStyles, UserWrapper } from './Userstyles';
-import FormContainer from './../../components/Form/FormContainer';
+import { useStyles, UserWrapper } from './../style';
+import FormContainer from './../../../components/Form/FormContainer';
 
 interface AddUserProps {
     list: { email?: string; first?: string; last?: string; Role?: string };

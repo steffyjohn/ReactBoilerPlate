@@ -5,10 +5,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import { useStyles } from './ChangePasswordStyles';
-import FormContainer from './../../components/Form/FormContainer';
-import { showToast } from './../../core/config/Toast';
-import { SUCCESS } from './../../core/config/constants';
+import { useStyles } from './style';
+import FormContainer from '../../components/Form/FormContainer';
+import { showToast } from '../../core/config/Toast';
+import { SUCCESS } from '../../core/config/constants';
 
 function ChangePassword() {
     const classes = useStyles();

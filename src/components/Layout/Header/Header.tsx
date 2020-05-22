@@ -10,7 +10,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { withStyles } from '@material-ui/core/styles';
 import { useStyles } from './../CommonStyle';
 import { getToggleSettings, changeDefaultTheme, resetStore } from './../../../slices/settingSlice';
-import { DefaultStore } from './../../../core/model/store.model';
+import { DefaultStore } from '../../../core/Interface/store.interface';
 import { LOGOUT_CONFIRMATION, WARNING } from './../../../core/config/constants';
 
 interface HeaderProps {

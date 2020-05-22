@@ -5,12 +5,12 @@ import swal from 'sweetalert';
 import Dialog, { DialogProps } from '@material-ui/core/Dialog';
 import { DialogContent, DialogTitle } from '@material-ui/core';
 import { useSelector } from 'react-redux';
-import CardHeader from './../../components/CardHeader/CardHeader';
-import { useStyles, UserWrapper } from './Userstyles';
+import CardHeader from '../../../components/CardHeader/CardHeader';
+import { useStyles, UserWrapper } from './../style';
 import AddUser from './AddUser';
-import { showToast } from '../../core/config/Toast';
-import { SUCCESS, DELETE_CONFIRMATION, WARNING } from '../../core/config/constants';
-import { DefaultStore } from '../../core/model/store.model';
+import { showToast } from './../../../core/config/Toast';
+import { SUCCESS, DELETE_CONFIRMATION, WARNING } from './../../../core/config/constants';
+import { DefaultStore } from '../../../core/Interface/store.interface';
 
 interface Row {
     first: string;

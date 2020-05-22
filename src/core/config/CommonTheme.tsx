@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { createMuiTheme } from '@material-ui/core/styles';
-import { DefaultStore } from './../model/store.model';
+import { DefaultStore } from '../Interface/store.interface';
 
 function CommonTheme() {
     const { layout } = useSelector((state: DefaultStore) => state.settings);

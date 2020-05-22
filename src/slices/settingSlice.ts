@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getTheme } from './../utils/utilities';
-import { Settings } from '../core/model/user.model';
+import { Settings } from '../core/Interface/user.interface';
 
 const initialState: Settings = {
     open: true,

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { UserAuth } from '../core/model/user.model';
+import { UserAuth } from '../core/Interface/user.interface';
 
 import fetch from '../core/interceptor';
 

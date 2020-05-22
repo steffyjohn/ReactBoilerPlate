@@ -1,3 +1,3 @@
-import Next from './Login';
+import Next from './Component';
 
 export default Next;

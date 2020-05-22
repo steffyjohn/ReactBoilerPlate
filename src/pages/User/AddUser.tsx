@@ -23,6 +23,8 @@ function AddUser(props: AddUserProps) {
             name: 'first',
             valid: '["required"]',
             value: undefined,
+            shrink: true,
+            placeholder: 'John',
         },
         {
             fieldType: 'input',
@@ -31,6 +33,7 @@ function AddUser(props: AddUserProps) {
             name: 'last',
             valid: '["required"]',
             value: undefined,
+            placeholder: 'Doe',
         },
 
         {
@@ -40,6 +43,7 @@ function AddUser(props: AddUserProps) {
             label: 'Email',
             valid: '["required","email"]',
             value: undefined,
+            placeholder: 'johnDoe@gmail.com.com',
         },
         {
             fieldType: 'select',

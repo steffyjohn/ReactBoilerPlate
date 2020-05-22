@@ -3,16 +3,8 @@ import clsx from 'clsx';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import Drawer from '@material-ui/core/Drawer';
-import Avatar from '@material-ui/core/Avatar';
-import List from '@material-ui/core/List';
-import Paper from '@material-ui/core/Paper';
-import Collapse from '@material-ui/core/Collapse';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
+import { List, Divider, IconButton, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import { useTheme } from '@material-ui/core/styles';
@@ -87,15 +79,6 @@ function Sidebar(props: SidebarProps) {
                 </div>
                 <Divider />
                 <List>
-                    {/* {open&&<Collapse in={checked}>
-                <div className={classes.paper}>
-                <Avatar className={classes.avatar}></Avatar> 
-                <span className={classes.icon}>Hi Steffy</span>
-               
-                     </div>   
-                  
-        
-        </Collapse>} */}
                     {Items.map((text, index) => (
                         <ListItem button key={text.label} onClick={() => handleClick(text)}>
                             <ListItemIcon

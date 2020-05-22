@@ -131,9 +131,6 @@ function Header(props: HeaderProps) {
                                     </MenuItem>
                                 );
                             })}
-                        {/* <MenuItem onClick={handleClose}>Profile</MenuItem> */}
-                        {/* <MenuItem onClick={handleClose}>Change Password</MenuItem>
-        <MenuItem  onClick={handleClose}>Logout</MenuItem> */}
                     </Menu>
                 </div>
             </Toolbar>

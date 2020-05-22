@@ -1,9 +1,8 @@
 import React from 'react';
-import { FooterStyles } from './../CommonStyle';
 import { useSelector } from 'react-redux';
+import { FooterStyles } from './../CommonStyle';
 import { DefaultStore } from './../../../core/model/store.model';
-import { Theme } from '@material-ui/core/styles';
-export default function Footer(props) {
+export default function Footer(props: any) {
     const classes = FooterStyles(props);
     const { open } = useSelector((state: DefaultStore) => state.settings);
 

@@ -78,16 +78,16 @@ function UserListingComponent(props: UserListingProps) {
                     className: layout.primary,
                 },
             },
-        }).then((willDelete) => {
-            if (willDelete) {
+        }).then((isDelete) => {
+            if (isDelete) {
                 setState((prevState) => {
                     const data = [...prevState.data];
                     data.splice(data.indexOf(rowData), 1);
                     return { ...prevState, data };
                 });
+                const toastObj = { type: SUCCESS, message: `User deleted successfully` };
+                showToast(toastObj);
             }
-            const toastObj = { type: SUCCESS, message: `User deleted successfully` };
-            showToast(toastObj);
         });
     };
     const onEditUser = (e, rowData) => {

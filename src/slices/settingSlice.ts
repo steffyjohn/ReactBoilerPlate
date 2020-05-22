@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getTheme } from './../components/utils/utilities';
+import { getTheme } from './../utils/utilities';
 import { Settings } from '../core/model/user.model';
 
 const initialState: Settings = {

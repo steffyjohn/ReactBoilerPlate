@@ -1,6 +1,6 @@
 import validator from 'validator';
 
-const FormValidator = {
+const FormValidator: any = {
     validate(element) {
         const isCheckbox = element.type === 'checkbox';
         const value = isCheckbox ? element.checked : element.value;
@@ -49,7 +49,7 @@ const FormValidator = {
         }
         return result;
     },
-    bulkValidate(inputs) {
+    bulkValidate(inputs: any) {
         let errors = {},
             hasError = false;
 

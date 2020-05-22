@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
 import { TextField } from '@material-ui/core';
-import FormValidator from './../utils/FormValidator/FormValidator';
+import FormValidator from './../../utils/FormValidator/FormValidator';
 
 interface FormContainerProps {
     submit: any;
@@ -152,11 +152,15 @@ function FormContainer(props: FormContainerProps) {
                             id={data.name}
                             label={data.label}
                             name={data.name}
-                            value={formRegister[data.name]}
+                            value={formRegister[data.name] || ''}
                             inputProps={{
                                 datavalidate: data.valid,
                                 dataparam: data.dataparam ? data.dataparam : '',
                             }}
+                            // InputLabelProps={{
+                            //     shrink: data.shrink? true:false,
+                            //   }}
+                            placeholder={data.placeholder ? data.placeholder : ''}
                             onBlur={onBlur(data)}
                             error={hasError(data.name)}
                             helperText={getErrorMessage(data.name)}
@@ -172,7 +176,7 @@ function FormContainer(props: FormContainerProps) {
                             key={index}
                             label={data.label}
                             name={data.name}
-                            value={formRegister[data.name]}
+                            value={formRegister[data.name] || ''}
                             fullWidth
                             onChange={onChange(data)}
                             onBlur={onBlur(data)}

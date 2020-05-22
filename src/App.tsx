@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import Routes from './Routes';
 
-function App(props) {
+function App(props: any) {
     return (
         <BrowserRouter>
             <Routes />

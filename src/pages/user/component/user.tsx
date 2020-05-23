@@ -144,6 +144,7 @@ function UserListingComponent(props: UserListingProps) {
                         headerStyle: {
                             fontWeight: 'bold',
                         },
+                        pageSizeOptions: [],
                     }}
                 />
             </div>

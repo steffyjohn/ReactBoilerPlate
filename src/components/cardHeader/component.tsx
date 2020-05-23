@@ -20,7 +20,7 @@ function CardHeader(props: CardHeaderProps) {
 
                     {props.permssion && (
                         <IconButton className={classes.iconButton} size="medium" onClick={() => props.onClick()}>
-                            <AddCircleIcon color="primary" />
+                            <AddCircleIcon className={classes.circleButton} color="primary" />
                         </IconButton>
                     )}
                 </Paper>

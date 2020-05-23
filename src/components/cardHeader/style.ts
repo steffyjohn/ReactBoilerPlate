@@ -21,5 +21,9 @@ export const useStyles = makeStyles((theme: Theme) =>
             marginBottom: theme.spacing(0.5),
             padding: 0,
         },
+        circleButton: {
+            width: '29px',
+            height: '28px',
+        },
     }),
 );

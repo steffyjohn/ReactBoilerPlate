@@ -9,33 +9,14 @@ import { useStyles } from './style';
 import FormContainer from '../../components/form/formContainer';
 import { showToast } from '../../utils/utilities';
 import { SUCCESS } from '../../core/config/constants';
+import { passwordFields } from '../../core/config/formFields';
 
 function ChangePassword() {
     const classes = useStyles();
     const history = useHistory();
     const [view, setview] = useState<any>(null);
     const [formRegister, setformRegister] = useState({});
-    const [DataModel, setDataModel] = React.useState([
-        {
-            fieldType: 'input',
-            inputType: 'text',
-            name: 'password',
-            label: 'Password',
-            valid: '["required"]',
-            value: undefined,
-            password: true,
-        },
-        {
-            fieldType: 'input',
-            inputType: 'text',
-            name: 'confirmpassword',
-            label: 'Confirm Password',
-            valid: '["required","equalto"]',
-            dataparam: 'password',
-            value: undefined,
-            password: true,
-        },
-    ]);
+    const [DataModel, setDataModel] = React.useState(passwordFields);
     const onNavigate = () => {
         history.push('/');
     };

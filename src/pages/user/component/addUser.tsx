@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import { useStyles, UserWrapper } from '../style';
 import FormContainer from '../../../components/form/formContainer';
+import { userFields } from '../../../core/config/formFields';
 
 interface AddUserProps {
     list: { email?: string; first?: string; last?: string; Role?: string };
@@ -15,59 +16,7 @@ function AddUser(props: AddUserProps) {
     const classes = useStyles();
     const [view, setview] = useState<any>(null);
     const [formRegister, setformRegister] = useState({});
-    const [DataModel, setDataModel] = useState([
-        {
-            fieldType: 'input',
-            inputType: 'text',
-            label: 'First Name',
-            name: 'first',
-            valid: '["required"]',
-            value: undefined,
-            shrink: true,
-            placeholder: 'John',
-        },
-        {
-            fieldType: 'input',
-            inputType: 'text',
-            label: 'Last Name',
-            name: 'last',
-            valid: '["required"]',
-            value: undefined,
-            placeholder: 'Doe',
-        },
-
-        {
-            fieldType: 'input',
-            inputType: 'text',
-            name: 'email',
-            label: 'Email',
-            valid: '["required","email"]',
-            value: undefined,
-            placeholder: 'johnDoe@gmail.com.com',
-        },
-        {
-            fieldType: 'select',
-            inputType: 'text',
-            name: 'Role',
-            label: 'Role',
-            options: [
-                {
-                    value: 'Admin',
-                    label: 'Admin',
-                },
-                {
-                    value: 'Manager',
-                    label: 'Manager',
-                },
-                {
-                    value: 'Executives',
-                    label: 'Executives',
-                },
-            ],
-            default: 'label',
-            value: undefined,
-        },
-    ]);
+    const [DataModel, setDataModel] = useState(userFields);
     useEffect(() => {
         if (!props.isNewUser) {
             DataModel.forEach((element) => {

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Avatar, Button, CssBaseline, Grid, Typography, Container } from '@material-ui/core';
 import { useStyles } from './style';
 import FormContainer from '../../components/form/formContainer';
+import { loginFields } from '../../core/config/formFields';
 
 interface SignInProps {
     history: any;
@@ -10,25 +11,7 @@ function SignIn(props: SignInProps) {
     const classes = useStyles();
     const [view, setview] = useState<any>(null);
     const [formRegister, setformRegister] = useState({});
-    const [DataModel, setDataModel] = useState([
-        {
-            fieldType: 'input',
-            inputType: 'text',
-            name: 'email',
-            label: 'Email',
-            valid: '["required","email"]',
-            value: undefined,
-        },
-        {
-            fieldType: 'input',
-            inputType: 'text',
-            name: 'password',
-            label: 'Password',
-            valid: '["required"]',
-            value: undefined,
-            password: true,
-        },
-    ]);
+    const [DataModel, setDataModel] = useState(loginFields);
     const formSubmit = (e) => {
         const form = e.target;
         const inputs = [...form.elements].filter((i) => ['INPUT', 'SELECT'].includes(i.nodeName));

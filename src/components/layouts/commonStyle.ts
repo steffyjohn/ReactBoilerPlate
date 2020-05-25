@@ -1,4 +1,6 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { GREY, LIGHT_GREY } from './../../core/config/colorPallete';
+
 const drawerWidth = 240;
 
 export const useStyles = makeStyles((theme: Theme) =>
@@ -75,7 +77,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             marginBottom: '60px',
         },
         icon: {
-            color: 'white',
+            color: theme.palette.common.white,
         },
         paper: {
             display: 'flex',
@@ -85,7 +87,7 @@ export const useStyles = makeStyles((theme: Theme) =>
         },
         avatar: {
             margin: theme.spacing(1),
-            backgroundColor: '#85908f',
+            backgroundColor: GREY,
         },
     }),
 );
@@ -97,10 +99,10 @@ export const FooterStyles = makeStyles((theme: Theme) => ({
         right: '0',
         bottom: '0',
         height: '60px',
-        borderTop: '1px solid #e4eaec',
+        borderTop: `1px solid ${LIGHT_GREY}`,
         padding: theme.spacing(0),
         zIndex: 109,
-        backgroundColor: 'white',
+        backgroundColor: theme.palette.common.white,
     },
     right: {
         padding: theme.spacing(2, 0),

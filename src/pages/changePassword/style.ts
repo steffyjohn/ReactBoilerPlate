@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { GREY } from './../../core/config/colorPallete';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,7 +21,7 @@ export const useStyles = makeStyles((theme) => ({
 
     avatar: {
         margin: theme.spacing(1),
-        backgroundColor: '#85908f',
+        backgroundColor: GREY,
     },
     form: {
         maxWidth: '400px',
@@ -31,16 +32,12 @@ export const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(1),
     },
     color: {
-        background: 'white',
+        background: theme.palette.common.white,
         margin: 'auto',
         borderRadius: theme.spacing(1.5),
     },
     submit: {
         margin: theme.spacing(1.5, 0, 2),
-        color: 'white',
-        // backgroundColor: '#26a69a',
-        // '&:hover': {
-        //     backgroundColor: '#26a69abd',
-        // },
+        color: theme.palette.common.white,
     },
 }));

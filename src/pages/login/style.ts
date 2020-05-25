@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 import AdminImage from './../../assets/Admin.jpg';
+import { teal, common, grey } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,7 +22,7 @@ export const useStyles = makeStyles((theme) => ({
 
     avatar: {
         margin: theme.spacing(1),
-        backgroundColor: '#85908f',
+        backgroundColor: grey[700],
     },
     form: {
         maxWidth: '400px',
@@ -32,15 +33,15 @@ export const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(1),
     },
     color: {
-        background: 'white',
+        background: common.white,
         margin: 'auto',
         borderRadius: theme.spacing(1.5),
     },
     submit: {
         margin: theme.spacing(1.5, 0, 2),
-        backgroundColor: '#26a69a',
+        backgroundColor: teal[400],
         '&:hover': {
-            backgroundColor: '#26a69abd',
+            backgroundColor: teal[300],
         },
     },
 }));

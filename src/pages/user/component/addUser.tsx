@@ -18,17 +18,10 @@ function AddUser(props: AddUserProps) {
     const [formRegister, setformRegister] = useState({});
     const [DataModel, setDataModel] = useState(userFields);
     useEffect(() => {
-        if (!props.isNewUser) {
-            DataModel.forEach((element) => {
-                element.value = props.list[element.name];
-                setDataModel([...DataModel]);
-            });
-        } else {
-            DataModel.forEach((element) => {
-                element.value = '';
-                setDataModel([...DataModel]);
-            });
-        }
+        DataModel.forEach((element) => {
+            element.value = !props.isNewUser ? props.list[element.name] : '';
+        });
+        setDataModel([...DataModel]);
     }, []);
 
     const formSubmit = (e) => {

@@ -21,7 +21,11 @@ function AddUser(props: AddUserProps) {
         if (!props.isNewUser) {
             DataModel.forEach((element) => {
                 element.value = props.list[element.name];
-
+                setDataModel([...DataModel]);
+            });
+        } else {
+            DataModel.forEach((element) => {
+                element.value = '';
                 setDataModel([...DataModel]);
             });
         }

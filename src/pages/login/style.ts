@@ -17,7 +17,7 @@ export const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         alignItems: 'center',
         paddingTop: theme.spacing(3),
-        paddingBottom: theme.spacing(3),
+        paddingBottom: theme.spacing(5),
     },
 
     avatar: {
@@ -26,10 +26,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     form: {
         maxWidth: '400px',
-        marginBottom: '10px',
-
-        paddingLeft: theme.spacing(3),
-        paddingRight: theme.spacing(3),
+        width: '80%',
         marginTop: theme.spacing(1),
     },
     color: {
@@ -38,8 +35,11 @@ export const useStyles = makeStyles((theme) => ({
         borderRadius: theme.spacing(1.5),
     },
     submit: {
-        margin: theme.spacing(1.5, 0, 2),
+        // margin: theme.spacing(1.5, 0, 2),
         backgroundColor: teal[400],
+        width: '100%',
+        height: '40px',
+        color: theme.palette.common.white,
         '&:hover': {
             backgroundColor: teal[300],
         },

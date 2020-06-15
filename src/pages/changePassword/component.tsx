@@ -1,40 +1,24 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import { useStyles } from './style';
+import { useStyles, ChangePasswordWrapper } from './style';
 import FormContainer from '../../components/form/formContainer';
 import { showToast } from '../../utils/utilities';
 import { SUCCESS } from '../../core/config/constants';
 import { passwordFields } from '../../core/config/formFields';
 
-function ChangePassword() {
+function ChangePassword(props: any) {
     const classes = useStyles();
     const history = useHistory();
     const [view, setview] = useState<any>(null);
-    const [formRegister, setformRegister] = useState({});
-    const [DataModel, setDataModel] = React.useState(passwordFields);
     const onNavigate = () => {
         history.push('/');
     };
-
-    const formSubmit = (e) => {
-        const form = e.target;
-        const inputs = [...form.elements].filter((i) => ['INPUT', 'SELECT'].includes(i.nodeName));
-        return inputs;
-    };
-
-    const onSubmitForm = (e) => {
-        e.preventDefault();
-        const inputs = formSubmit(e);
-        setview(inputs);
-    };
     const OnCompleteForm = (value) => {
         const { password, confirmpassword } = value;
-
         if (password && confirmpassword) {
             const toastObj = {
                 type: SUCCESS,
@@ -49,7 +33,7 @@ function ChangePassword() {
     };
 
     return (
-        <div>
+        <ChangePasswordWrapper>
             <Grid container component="main" className={classes.root}>
                 <Container component="main" maxWidth="xs" className={classes.color}>
                     <CssBaseline />
@@ -57,32 +41,19 @@ function ChangePassword() {
                         <Typography component="h1" variant="h5">
                             Change Password
                         </Typography>
-
-                        <form className={classes.form} noValidate onSubmit={onSubmitForm}>
-                            <FormContainer
-                                fields={DataModel}
-                                submit={view}
-                                cb={OnCompleteForm}
-                                cb2={() => setview(null)}
-                                formRegister={formRegister}
-                            />
-                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                <Button
-                                    type="submit"
-                                    fullWidth
-                                    variant="contained"
-                                    color="primary"
-                                    className={classes.submit}
-                                    size={'large'}
-                                >
-                                    Confirm
-                                </Button>
-                            </div>
-                        </form>
+                        <FormContainer
+                            fields={passwordFields}
+                            initialValues={{ password: '', confirmpassword: '' }}
+                            submit={classes.submit}
+                            formClass={classes.form}
+                            cb={OnCompleteForm}
+                            buttonLabel={'Confirm'}
+                            {...props}
+                        />
                     </div>
                 </Container>
             </Grid>
-        </div>
+        </ChangePasswordWrapper>
     );
 }
 

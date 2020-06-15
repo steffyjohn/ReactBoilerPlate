@@ -9,8 +9,18 @@ import CardHeader from '../../../components/cardHeader/component';
 import { useStyles, UserWrapper } from '../style';
 import AddUser from './addUser';
 import { showToast } from '../../../utils/utilities';
-import { SUCCESS, DELETE_CONFIRMATION, WARNING } from '../../../core/config/constants';
+import {
+    SUCCESS,
+    DELETE_CONFIRMATION,
+    WARNING,
+    CANCEL,
+    DELETED_MESSAGE,
+    ADD_USER,
+    EDIT_USER,
+    DELETE_USER,
+} from '../../../core/config/constants';
 import { DefaultStore } from '../../../core/Interface/store.interface';
+import { TableData } from './../../../core/config/formFields';
 
 interface Row {
     first: string;
@@ -46,30 +56,14 @@ function UserListingComponent(props: UserListingProps) {
             }
         }
     }, [open]);
-    const [state, setState] = React.useState<TableState>({
-        columns: [
-            { title: 'Name', field: 'first' },
-            { title: 'Surname', field: 'last' },
-            { title: 'Email', field: 'email' },
-            { title: 'Role', field: 'Role' },
-        ],
-        data: [
-            { first: 'Steffy', last: 'John', Role: 'Manager', email: 'abc@gmail.com' },
-            {
-                first: 'Zerya Betül',
-                last: 'Baran',
-                Role: 'Executives',
-                email: 'xyz@gmail.com',
-            },
-        ],
-    });
+    const [state, setState] = React.useState<TableState>(TableData);
     const deleteUser = (e, rowData) => {
         swal({
             text: DELETE_CONFIRMATION,
             icon: WARNING,
             buttons: {
                 cancel: {
-                    text: 'Cancel',
+                    text: CANCEL,
                     value: null,
                     visible: true,
                     closeModal: true,
@@ -85,7 +79,7 @@ function UserListingComponent(props: UserListingProps) {
                     data.splice(data.indexOf(rowData), 1);
                     return { ...prevState, data };
                 });
-                const toastObj = { type: SUCCESS, message: `User deleted successfully` };
+                const toastObj = { type: SUCCESS, message: DELETED_MESSAGE };
                 showToast(toastObj);
             }
         });
@@ -131,12 +125,12 @@ function UserListingComponent(props: UserListingProps) {
                     actions={[
                         {
                             icon: 'edit',
-                            tooltip: 'Edit User',
+                            tooltip: EDIT_USER,
                             onClick: onEditUser,
                         },
                         {
                             icon: 'delete',
-                            tooltip: 'Delete User',
+                            tooltip: DELETE_USER,
                             onClick: deleteUser,
                         },
                     ]}
@@ -154,8 +148,8 @@ function UserListingComponent(props: UserListingProps) {
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
             >
-                <DialogTitle id="scroll-dialog-title" style={{ fontWeight: 'bold' }}>
-                    {isNewUser ? 'Add User' : 'Edit User'}
+                <DialogTitle id="scroll-dialog-title" style={{ fontWeight: 'bold', width: '500px' }}>
+                    {isNewUser ? ADD_USER : EDIT_USER}
                 </DialogTitle>
                 <DialogContent
                     style={{ paddingBottom: '10px' }}

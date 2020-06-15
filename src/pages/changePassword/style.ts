@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { GREY } from './../../core/config/colorPallete';
+import styled from 'styled-components';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -7,6 +8,7 @@ export const useStyles = makeStyles((theme) => ({
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        padding: 0,
     },
 
     paper: {
@@ -24,9 +26,9 @@ export const useStyles = makeStyles((theme) => ({
         backgroundColor: GREY,
     },
     form: {
-        maxWidth: '400px',
+        // maxWidth: '400px',
         marginBottom: '10px',
-
+        width: '100%',
         paddingLeft: theme.spacing(3),
         paddingRight: theme.spacing(3),
         marginTop: theme.spacing(1),
@@ -37,7 +39,14 @@ export const useStyles = makeStyles((theme) => ({
         borderRadius: theme.spacing(1.5),
     },
     submit: {
-        margin: theme.spacing(1.5, 0, 2),
+        margin: theme.spacing(0, 0, 2),
         color: theme.palette.common.white,
+        width: '100%',
     },
 }));
+export const ChangePasswordWrapper = styled.div`
+    .MuiContainer-root {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+`;

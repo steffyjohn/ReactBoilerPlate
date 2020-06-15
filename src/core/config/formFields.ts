@@ -4,7 +4,6 @@ export const loginFields = [
         inputType: 'text',
         name: 'email',
         label: 'Email',
-        valid: '["required","email"]',
         value: '',
     },
     {
@@ -12,9 +11,8 @@ export const loginFields = [
         inputType: 'text',
         name: 'password',
         label: 'Password',
-        valid: '["required"]',
         value: '',
-        password: true,
+        type: 'password',
     },
 ];
 
@@ -24,8 +22,7 @@ export const userFields = [
         inputType: 'text',
         label: 'First Name',
         name: 'first',
-        valid: '["required"]',
-        value: '',
+        value: 'fghgh',
         shrink: true,
         placeholder: 'John',
     },
@@ -34,7 +31,6 @@ export const userFields = [
         inputType: 'text',
         label: 'Last Name',
         name: 'last',
-        valid: '["required"]',
         value: '',
         placeholder: 'Doe',
     },
@@ -44,7 +40,6 @@ export const userFields = [
         inputType: 'text',
         name: 'email',
         label: 'Email',
-        valid: '["required","email"]',
         value: '',
         placeholder: 'johnDoe@gmail.com.com',
     },
@@ -67,8 +62,8 @@ export const userFields = [
                 label: 'Executives',
             },
         ],
-        default: 'label',
-        value: '',
+        default: 'value',
+        value: 'Admin',
     },
 ];
 
@@ -78,18 +73,33 @@ export const passwordFields = [
         inputType: 'text',
         name: 'password',
         label: 'Password',
-        valid: '["required"]',
         value: '',
-        password: true,
+        type: 'password',
     },
     {
         fieldType: 'input',
         inputType: 'text',
         name: 'confirmpassword',
         label: 'Confirm Password',
-        valid: '["required","equalto"]',
-        dataparam: 'password',
         value: '',
-        password: true,
+        type: 'password',
     },
 ];
+
+export const TableData = {
+    columns: [
+        { title: 'Name', field: 'first' },
+        { title: 'Surname', field: 'last' },
+        { title: 'Email', field: 'email' },
+        { title: 'Role', field: 'Role' },
+    ],
+    data: [
+        { first: 'Steffy', last: 'John', Role: 'Manager', email: 'abc@gmail.com' },
+        {
+            first: 'Zerya Betül',
+            last: 'Baran',
+            Role: 'Executives',
+            email: 'xyz@gmail.com',
+        },
+    ],
+};
